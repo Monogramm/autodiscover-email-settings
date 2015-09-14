@@ -4,7 +4,11 @@
   "description": "Providers Autodiscover capabilities for IMAP/SMTP services on Microsoft Outlook/Apple Mail and Autoconf capabilities for Thunderbird",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "engines": {
+      "node": ">=4.0.0"
   },
   "repository": {
     "type": "git",
