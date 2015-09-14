@@ -15,7 +15,7 @@ function findChild(name, children) {
 	}
 }
 
-router.post('/Autodiscover/Autodiscover.xml', function *autodiscover(next) {
+router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 	log(this.request.headers, this.request.body);
 
 	this.set('Content-Type', 'application/xml');
@@ -26,14 +26,12 @@ router.post('/Autodiscover/Autodiscover.xml', function *autodiscover(next) {
 	const username	= email.split('@')[0];
 	const domain	= email.split('@')[1];
 
-	this.render('autodiscover', {
+	yield this.render('autodiscover', {
 		schema: schema.content,
 		email,
 		username,
 		domain
 	});
-
-	yield next;
 });
 
 app.context.render = swig({
