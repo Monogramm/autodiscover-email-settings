@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
+	<Response xmlns="{{schema}}">
+		<User>
+			<DisplayName>{{email}}</DisplayName>
+		</User>
+
+		<Account>
+			<AccountType>email</AccountType>
+			<Action>settings</Action>
+
+			<Protocol>
+				<Type>IMAP</Type>
+				<TTL>1</TTL>
+
+				<Server>imap.{{domain}}</Server>
+				<Port>993</Port>
+
+				<LoginName>{{email}}</LoginName>
+
+				<DomainRequired>on</DomainRequired>
+				<DomainName>{{domain}}</DomainName>
+
+				<SPA>off</SPA>
+				<SSL>on</SSL>
+				<AuthRequired>on</AuthRequired>
+			</Protocol>
+		</Account>
+
+		<Account>
+			<AccountType>email</AccountType>
+			<Action>settings</Action>
+
+			<Protocol>
+				<Type>SMTP</Type>
+				<TTL>1</TTL>
+
+				<Server>imap.{{domain}}</Server>
+				<Port>587</Port>
+
+				<LoginName>{{email}}</LoginName>
+
+				<DomainRequired>on</DomainRequired>
+				<DomainName>{{domain}}</DomainName>
+
+				<SPA>off</SPA>
+				<SSL>on</SSL>
+				<AuthRequired>on</AuthRequired>
+			</Protocol>
+		</Account>
+	</Response>
+</Autodiscover>

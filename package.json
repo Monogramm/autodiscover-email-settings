@@ -1,0 +1,36 @@
+{
+  "name": "autodiscover.xml",
+  "version": "1.0.0",
+  "description": "Providers Autodiscover capabilities for IMAP/SMTP services on Microsoft Outlook/Apple Mail and Autoconf capabilities for Thunderbird",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tiliq/autodiscover.xml.git"
+  },
+  "author": "Kevin J. Martin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tiliq/autodiscover.xml/issues"
+  },
+  "homepage": "https://github.com/Tiliq/autodiscover.xml#readme",
+  "keywords": [
+    "tiliq",
+    "autoconfigure",
+    "autoconf",
+    "autodiscover",
+    "outlook",
+    "thunderbird",
+    "apple mail",
+    "imap",
+    "smtp"
+  ],
+  "dependencies": {
+    "koa": "^1.0.0",
+    "koa-buddy": "^0.1.0",
+    "koa-router": "^5.1.2",
+    "koa-swig": "^2.0.0"
+  }
+}
