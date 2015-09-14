@@ -5,7 +5,6 @@ const app		= require('koa')();
 const swig		= require('koa-swig');
 const body		= require('koa-buddy');
 const router	= require('koa-router')();
-const log		= console.log.bind(console);
 
 function findChild(name, children) {
 	for (let child of children) {
@@ -15,9 +14,8 @@ function findChild(name, children) {
 	}
 }
 
+// Microsoft Outlook / Apple Mail
 router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
-	log(this.request.headers, this.request.body);
-
 	this.set('Content-Type', 'application/xml');
 
 	const request	= findChild('Request', this.request.body.root.children);
@@ -32,6 +30,12 @@ router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 		username,
 		domain
 	});
+});
+
+// Thunderbird
+router.get('/mail/config-v1.1.xml', function *autoconfig() {
+	this.set('Content-Type', 'application/xml');
+	yield this.render('autoconfig');
 });
 
 app.context.render = swig({
