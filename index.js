@@ -20,7 +20,7 @@ router.post('/Autodiscover/Autodiscover.xml', function *autodiscover(next) {
 
 	this.set('Content-Type', 'application/xml');
 
-	const request	= findChild('Request');
+	const request	= findChild('Request', this.request.body.root.children);
 	const schema	= findChild('AcceptableResponseSchema', request.children);
 	const email		= findChild('EMailAddress', request.children).content;
 	const username	= email.split('@')[0];
@@ -41,6 +41,14 @@ app.context.render = swig({
 	autoescape: true,
 	cache: 'memory',
 	ext: 'xml'
+});
+
+app.use(function *fixContentType(next) {
+	if (this.request.headers['content-type'] === 'text/xml') {
+		this.request.headers['content-type'] = 'application/xml';
+	}
+
+	yield next;
 });
 
 app.use(body());
