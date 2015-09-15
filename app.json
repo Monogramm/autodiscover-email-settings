@@ -1,6 +1,6 @@
 {
 	"name": "Autodiscover.xml",
-	"description": "Providers Autodiscover capabilities for IMAP/SMTP services on Microsoft Outlook/Apple Mail and Autoconf capabilities for Thunderbird",
+	"description": "Provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.",
 	"website": "https://tiliq.com",
 	"repository": "https://github.com/Tiliq/autodiscover.xml",
 	"keywords": ["tiliq", "autoconfigure", "autoconf", "autodiscover", "outlook", "thunderbird", "apple mail", "imap", "smtp"],

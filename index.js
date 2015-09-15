@@ -38,6 +38,28 @@ router.get('/mail/config-v1.1.xml', function *autoconfig() {
 	yield this.render('autoconfig');
 });
 
+// iOS / Apple Mail (/email.mobileconfig?email=username@domain.com)
+router.get('/email.mobileconfig', function *autoconfig() {
+	const email = this.request.email;
+
+	if (!email || !~email.indexOf('@')) {
+		this.status = 400;
+
+		return;
+	}
+
+	const domain	= email.split('@').pop();
+	const filename	= `${domain}.mobileconfig`;
+
+	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
+	this.set('Content-Disposition', `attachment; filename="${filename}"`);
+
+	yield this.render('autoconfig', {
+		email,
+		domain
+	});
+});
+
 app.context.render = swig({
 	root: path.join(__dirname, 'views'),
 	autoescape: true,
