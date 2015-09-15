@@ -54,7 +54,7 @@ router.get('/email.mobileconfig', function *autoconfig() {
 	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
 	this.set('Content-Disposition', `attachment; filename="${filename}"`);
 
-	yield this.render('autoconfig', {
+	yield this.render('mobileconfig', {
 		email,
 		domain
 	});
