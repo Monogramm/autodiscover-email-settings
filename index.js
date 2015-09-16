@@ -17,7 +17,6 @@ function findChild(name, children) {
 // Microsoft Outlook / Apple Mail
 router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 	this.set('Content-Type', 'application/xml');
-	console.log(this.request.headers, this.request.body);
 
 	const request	= findChild('Request', this.request.body.root.children);
 	const schema	= findChild('AcceptableResponseSchema', request.children);
@@ -69,8 +68,11 @@ app.context.render = swig({
 });
 
 app.use(function *fixContentType(next) {
-	if (this.request.headers['content-type'] === 'text/xml') {
-		this.request.headers['content-type'] = 'application/xml';
+	if (this.request.headers['content-type'].indexOf('text/xml') === 0) {
+		let oldType	= this.request.headers['content-type'];
+		let newType	= oldType.replace('text/xml', 'application/xml');
+
+		this.request.headers['content-type'] = newType;
 	}
 
 	yield next;
