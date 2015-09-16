@@ -17,6 +17,7 @@ function findChild(name, children) {
 // Microsoft Outlook / Apple Mail
 router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 	this.set('Content-Type', 'application/xml');
+	console.log(this.request.body);
 
 	const request	= findChild('Request', this.request.body.root.children);
 	const schema	= findChild('AcceptableResponseSchema', request.children);
