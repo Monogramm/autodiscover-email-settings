@@ -68,9 +68,10 @@ app.context.render = swig({
 });
 
 app.use(function *fixContentType(next) {
-	if (this.request.headers['content-type'].indexOf('text/xml') === 0) {
-		let oldType	= this.request.headers['content-type'];
-		let newType	= oldType.replace('text/xml', 'application/xml');
+	let type = this.request.headers['content-type'];
+
+	if (type && type.indexOf('text/xml') === 0) {
+		let newType = type.replace('text/xml', 'application/xml');
 
 		this.request.headers['content-type'] = newType;
 	}
