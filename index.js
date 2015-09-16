@@ -40,7 +40,7 @@ router.get('/mail/config-v1.1.xml', function *autoconfig() {
 
 // iOS / Apple Mail (/email.mobileconfig?email=username@domain.com)
 router.get('/email.mobileconfig', function *autoconfig() {
-	const email = this.request.email;
+	const email = this.request.query.email;
 
 	if (!email || !~email.indexOf('@')) {
 		this.status = 400;
