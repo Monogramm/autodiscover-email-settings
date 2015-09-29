@@ -3,29 +3,28 @@ Provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Au
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-
 ## Microsoft Outlook/Apple Mail
-URL (POST XML): https://autodiscover.tiliq.com/Autodiscover/Autodiscover.xml
+URL (POST XML): https://{{app_domain}}/Autodiscover/Autodiscover.xml
 
 Create a SRV DNS Record:
 
 |    Service    | Protocol | Value, Destination, Target | Port | Priority | Weight | TTL  |
 |:-------------:|:--------:|:--------------------------:|:----:|:--------:|:------:|:----:|
-| _autodiscover |   _tcp   |   autodiscover.tiliq.com   |  443 |     5    | 0      | 3600 |
+| _autodiscover |   _tcp   |   {{app_domain}}   |  443 |     5    | 0      | 3600 |
 
 Test your Autodiscover configuration (Microsoft Outlook): https://testconnectivity.microsoft.com (Click on "Outlook Autodiscover")
 
 ## Mozilla Thunderbird
-URL (GET): https://autoconfig.tiliq.com/mail/config-v1.1.xml
+URL (GET): https://{{app_domain}}/mail/config-v1.1.xml
 
 Create a CNAME DNS Record:
 
 | Name, Host, Alias |  Value, Destination  |  TTL |
 |:-----------------:|:--------------------:|:----:|
-|     autoconfig    | autoconfig.tiliq.com | 3600 |
+|     autoconfig    | {{app_domain}} | 3600 |
 
 ## iOS / Apple Mail
-URL (GET): https://autodiscover.tiliq.com/email.mobileconfig?email=EMAIL_ADDRESS
+URL (GET): https://{{app_domain}}/email.mobileconfig?email=EMAIL_ADDRESS
 
 Redirect users to above URL and the MobileConfig Profile will be downloaded. The user will be instructed to install the profile to configure their email.
 
@@ -33,16 +32,8 @@ Redirect users to above URL and the MobileConfig Profile will be downloaded. The
 
 The above autoconfiguration methods assume the following:
 
-* IMAP Server: `imap.{{domain}}`
-* IMAP Port: `993`
-* SMTP Server: `smtp.{{domain}}`
-* SMTP Port: `587`
 * Username: `{{email}}` (Entire email address)
 * Encryption: SSL/TLS
-
-Also, if you use the hosted versions of the above tools via Tiliq.com, please note that we log all requests which may include query strings containing email addresses.
-
-Although we do not use the information in the query strings, we are telling you so that if you want to feel safer with your information, you can (and should) deploy your own copy of this repository using the Heroku Deploy button above.
 
 ## Workarounds
 

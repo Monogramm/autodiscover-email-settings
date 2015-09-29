@@ -18,9 +18,9 @@
 			<key>IncomingMailServerAuthentication</key>
 			<string>EmailAuthPassword</string>
 			<key>IncomingMailServerHostName</key>
-			<string>imap.{{domain}}</string>
+			<string>{{imap.host}}</string>
 			<key>IncomingMailServerPortNumber</key>
-			<integer>993</integer>
+			<integer>{{imap.port}}</integer>
 			<key>IncomingMailServerUseSSL</key>
 			<true/>
 			<key>IncomingMailServerUsername</key>
@@ -28,9 +28,9 @@
 			<key>OutgoingMailServerAuthentication</key>
 			<string>EmailAuthPassword</string>
 			<key>OutgoingMailServerHostName</key>
-			<string>smtp.{{domain}}</string>
+			<string>{{smtp.host}}</string>
 			<key>OutgoingMailServerPortNumber</key>
-			<integer>587</integer>
+			<integer>{{smtp.port}}</integer>
 			<key>OutgoingMailServerUseSSL</key>
 			<true/>
 			<key>OutgoingMailServerUsername</key>

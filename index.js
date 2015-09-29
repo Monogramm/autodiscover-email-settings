@@ -5,6 +5,7 @@ const app		= require('koa')();
 const swig		= require('koa-swig');
 const body		= require('koa-buddy');
 const router	= require('koa-router')();
+const settings	= require('./settings.js');
 
 function findChild(name, children) {
 	for (let child of children) {
@@ -64,7 +65,8 @@ app.context.render = swig({
 	root: path.join(__dirname, 'views'),
 	autoescape: true,
 	cache: 'memory',
-	ext: 'xml'
+	ext: 'xml',
+	locals: settings
 });
 
 app.use(function *fixContentType(next) {

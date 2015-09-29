@@ -6,5 +6,27 @@
 	"keywords": ["tiliq", "autoconfigure", "autoconf", "autodiscover", "outlook", "thunderbird", "apple mail", "imap", "smtp"],
 	"addons": [
 		"papertrail"
-	]
+	],
+	"env": {
+		"DOMAIN": {
+			"description": "Your default domain",
+			"value": "example.com"
+		},
+		"IMAP_HOST": {
+			"description": "Your IMAP Host",
+			"value": "imap.example.com"
+		},
+		"IMAP_PORT": {
+			"description": "Your Secure IMAP Port",
+			"value": "993"
+		},
+		"SMTP_HOST": {
+			"description": "Your SMTP Host",
+			"value": "smtp.example.com"
+		},
+		"SMTP_PORT": {
+			"description": "Your Secure SMTP Port",
+			"value": "587"
+		}
+	}
 }

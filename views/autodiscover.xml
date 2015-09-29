@@ -13,8 +13,8 @@
 				<Type>IMAP</Type>
 				<TTL>1</TTL>
 
-				<Server>imap.{{domain}}</Server>
-				<Port>993</Port>
+				<Server>{{imap.host}}</Server>
+				<Port>{{imap.port}}</Port>
 
 				<LoginName>{{email}}</LoginName>
 
@@ -35,8 +35,8 @@
 				<Type>SMTP</Type>
 				<TTL>1</TTL>
 
-				<Server>imap.{{domain}}</Server>
-				<Port>587</Port>
+				<Server>{{smtp.host}}</Server>
+				<Port>{{smtp.port}}</Port>
 
 				<LoginName>{{email}}</LoginName>
 
