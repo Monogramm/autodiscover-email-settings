@@ -6,6 +6,6 @@ module.exports = {
 	},
 	smtp: {
 		host: process.env.SMTP_HOST,
-		port: process.env.SMTP_HOST
+		port: process.env.SMTP_PORT
 	}
 };
