@@ -1,32 +1,38 @@
 # autodiscover.xml
+
 Provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+#### DNS settings
 
-## Microsoft Outlook/Apple Mail
-URL (POST XML): https://{{app_domain}}/Autodiscover/Autodiscover.xml
+For the case you are using Bind and have the autoconfig HTTP server running on the same IP your `www.` subdomain resolves to, you can use this DNS records to configure your nameserver
 
-Create a SRV DNS Record:
+```
+autoconfig              IN      CNAME   www
+autodiscover            IN      CNAME   www
 
-|    Service    | Protocol | Value, Destination, Target | Port | Priority | Weight | TTL  |
-|:-------------:|:--------:|:--------------------------:|:----:|:--------:|:------:|:----:|
-| _autodiscover |   _tcp   |   {{app_domain}}   |  443 |     5    | 0      | 3600 |
+@                       IN      MX 10   {{$MX_DOMAIN}}.
+@                       IN      TXT     "mailconf=https://autoconfig.{{$DOMAIN}}/mail/config-v1.1.xml"
+_imaps._tcp             SRV 0 1 993     {{$MX_DOMAIN}}.
+_submission._tcp        SRV 0 1 465     {{$MX_DOMAIN}}.
+_autodiscover._tcp      SRV 0 0 443     autodiscover.{{$DOMAIN}}.
+```
 
-Test your Autodiscover configuration (Microsoft Outlook): https://testconnectivity.microsoft.com (Click on "Outlook Autodiscover")
+Instead of a CNAME, you can of course also choose an A-record
 
-## Mozilla Thunderbird
-URL (GET): https://{{app_domain}}/mail/config-v1.1.xml
+```
+autoconfig              IN      A      {{$AUTODISCOVER_IP}}
+autodiscover            IN      A      {{$AUTODISCOVER_IP}}
+```
 
-Create a CNAME DNS Record:
+Replace above variables with data according to this table
 
-| Name, Host, Alias |  Value, Destination  |  TTL |
-|:-----------------:|:--------------------:|:----:|
-|     autoconfig    | {{app_domain}} | 3600 |
+| Variable        | Description                         |
+| --------------- | ----------------------------------- |
+| MX_DOMAIN       | The hostname name of your MX server |
+| DOMAIN          | Your apex/bare/naked Domain         |
+| AUTODISCOVER_IP | IP of the Autoconfig HTTP           |
 
-## iOS / Apple Mail
-URL (GET): https://{{app_domain}}/email.mobileconfig?email=EMAIL_ADDRESS
-
-Redirect users to above URL and the MobileConfig Profile will be downloaded. The user will be instructed to install the profile to configure their email.
+---
 
 ## Notes
 
@@ -41,10 +47,10 @@ The above autoconfiguration methods assume the following:
 
 Create CNAME DNS Records that alias imap/smtp to your machine, like so:
 
-| Name, Host, Alias | Value, Destination |  TTL |
-|:-----------------:|:------------------:|:----:|
-|        imap       |  mail.mydomain.com | 3600 |
-|        smtp       |  mail.mydomain.com | 3600 |
+| Name, Host, Alias | Value, Destination | TTL  |
+| :---------------: | :----------------: | :--: |
+|       imap        | mail.mydomain.com  | 3600 |
+|       smtp        | mail.mydomain.com  | 3600 |
 
 #### My settings are different or not compatible with these settings.
 
