@@ -6,7 +6,7 @@ This service is created to autodiscover your provider email settings.
 
 It provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
 
-#### DNS settings
+### DNS settings
 
 ```
 autoconfig              IN      A      {{$AUTODISCOVER_IP}}
@@ -30,11 +30,11 @@ Replace above variables with data according to this table
 
 ---
 
-## Usage
+### Usage
 
 [traefik](https://github.com/containous/traefik) can proxy your containers on docker, on docker swarm, and on a wide range of orchestrators
 
-### docker
+#### docker
 
 ```yaml
 version: '2'
@@ -53,7 +53,7 @@ services:
       - "traefik.frontend.rule=Host:autoconfig.domain.com,autodiscover.domain.com"
 ```
 
-### docker swarm
+#### docker swarm
 
 ```yaml
 version: '3'
@@ -74,11 +74,11 @@ services:
         - "traefik.frontend.rule=Host:autoconfig.domain.com,autodiscover.domain.com"
 ```
 
-## Credits
+### Credits
 
 Inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but with https://github.com/Tiliq/autodiscover.xml instead of https://github.com/gronke/email-autodiscover to allow a much lighter image based of node on alpine instead of apache on debian
 
-## Notes
+### Notes
 
 The above autoconfiguration methods assume the following:
 
@@ -86,6 +86,6 @@ The above autoconfiguration methods assume the following:
 * Encryption: SSL/TLS
   .
 
-## License
+### License
 
 This project is distributed under the [MIT License](LICENSE)
