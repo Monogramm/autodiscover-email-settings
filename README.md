@@ -11,13 +11,13 @@ It provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail,
 ```
 autoconfig              IN      A      {{$AUTODISCOVER_IP}}
 autodiscover            IN      A      {{$AUTODISCOVER_IP}}
-imap                    IN      A      {{$MX_DOMAIN}}
-smtp                    IN      A      {{$MX_DOMAIN}}
-@                       IN      MX 10   {{$MX_DOMAIN}}.
+imap                    IN      CNAME  {{$MX_DOMAIN}}.
+smtp                    IN      CNAME  {{$MX_DOMAIN}}.
+@                       IN      MX 10  {{$MX_DOMAIN}}.
 @                       IN      TXT     "mailconf=https://autoconfig.{{$DOMAIN}}/mail/config-v1.1.xml"
-_imaps._tcp             SRV 0 1 993     {{$MX_DOMAIN}}.
-_submission._tcp        SRV 0 1 465     {{$MX_DOMAIN}}.
-_autodiscover._tcp      SRV 0 0 443     autodiscover.{{$DOMAIN}}.
+_imaps._tcp             IN      SRV    0 0 993 {{MX_DOMAIN}}.
+_submission._tcp        IN      SRV    0 0 587 {{MX_DOMAIN}}.
+_autodiscover._tcp      IN      SRV    0 0 443 autodiscover.{{$DOMAIN}}.
 ```
 
 Replace above variables with data according to this table
@@ -76,7 +76,7 @@ services:
 
 ### Credits
 
-Inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but with https://github.com/Tiliq/autodiscover.xml instead of https://github.com/gronke/email-autodiscover to allow a much lighter image based of node on alpine instead of apache on debian
+Inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but with https://github.com/Tiliq/autodiscover.xml instead of https://github.com/gronke/email-autodiscover to allow a much lighter ([![](https://images.microbadger.com/badges/image/weboaks/autodiscover-email-settings.svg)](https://microbadger.com/images/weboaks/autodiscover-email-settings)) image based of node on alpine instead of apache on debian ([![](https://images.microbadger.com/badges/image/jsmitsnl/docker-email-autodiscover.svg)](https://microbadger.com/images/jsmitsnl/docker-email-autodiscover))
 
 ### Notes
 
