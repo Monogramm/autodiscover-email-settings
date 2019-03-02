@@ -46,8 +46,10 @@ services:
     - DOMAIN=domain.com
     - IMAP_HOST=imap.domain.com
     - IMAP_PORT=993
+    - IMAP_SOCKET=SSL
     - SMTP_HOST=smtp.domain.com
-    - SMTP_PORT=465
+    - SMTP_PORT=587
+    - SMTP_SOCKET=STARTTLS
     labels:
       - "traefik.port=8000"
       - "traefik.frontend.rule=Host:autoconfig.domain.com,autodiscover.domain.com"
@@ -65,8 +67,10 @@ services:
     - DOMAIN=domain.com
     - IMAP_HOST=imap.domain.com
     - IMAP_PORT=993
+    - IMAP_SOCKET=SSL
     - SMTP_HOST=smtp.domain.com
-    - SMTP_PORT=465
+    - SMTP_PORT=587
+    - SMTP_SOCKET=STARTTLS
     deploy:
       replicas: 1
       labels:
@@ -83,8 +87,12 @@ Inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but wit
 The above autoconfiguration methods assume the following:
 
 * Username: `{{email}}` (Entire email address)
-* Encryption: SSL/TLS
-  .
+
+### Links
+
+* Mozilla [Autoconfig configuration](https://developer.mozilla.org/en-US/docs/Mozilla/Thunderbird/Autoconfiguration/FileFormat/HowTo)
+* Microsoft [Exchange Command Reference](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-ascmd/1a3490f1-afe1-418a-aa92-6f630036d65a)
+* Apple [ConfigurationProfile reference](https://developer.apple.com/business/documentation/Configuration-Profile-Reference.pdf)
 
 ### License
 

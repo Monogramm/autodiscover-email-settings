@@ -24,12 +24,17 @@ router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 	const email		= findChild('EMailAddress', request.children).content;
 	const username	= email.split('@')[0];
 	const domain	= email.split('@')[1];
+	
+	const imapenc   = settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
+	const smtpenc   = settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
 
 	yield this.render('autodiscover', {
 		schema: schema.content,
 		email,
 		username,
-		domain
+		domain,
+		imapenc,
+		smtpenc
 	});
 });
 
@@ -51,13 +56,18 @@ router.get('/email.mobileconfig', function *autoconfig() {
 
 	const domain	= email.split('@').pop();
 	const filename	= `${domain}.mobileconfig`;
+	
+	const inssl	    = settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? '<true/>' : '<false/>';
+	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? '<true/>' : '<false/>';
 
 	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
 	this.set('Content-Disposition', `attachment; filename="${filename}"`);
 
 	yield this.render('mobileconfig', {
 		email,
-		domain
+		domain,
+		inssl,
+		outssl
 	});
 });
 

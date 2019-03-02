@@ -17,16 +17,24 @@
 			"value": "imap.example.com"
 		},
 		"IMAP_PORT": {
-			"description": "Your Secure IMAP Port",
+			"description": "Your IMAP Port",
 			"value": "993"
+		},
+		"IMAP_SOCKET": {
+			"description": "Your IMAP Socket",
+			"value": "SSL"
 		},
 		"SMTP_HOST": {
 			"description": "Your SMTP Host",
 			"value": "smtp.example.com"
 		},
 		"SMTP_PORT": {
-			"description": "Your Secure SMTP Port",
+			"description": "Your SMTP Port",
 			"value": "587"
+		},
+		"SMTP_SOCKET": {
+			"description": "Your SMTP Socket",
+			"value": "STARTTLS"
 		}
 	}
 }

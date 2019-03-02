@@ -22,7 +22,7 @@
 				<DomainName>{{domain}}</DomainName>
 
 				<SPA>off</SPA>
-				<SSL>on</SSL>
+				<Encryption>{{imapenc}}</Encryption>
 				<AuthRequired>on</AuthRequired>
 			</Protocol>
 		</Account>
@@ -44,7 +44,7 @@
 				<DomainName>{{domain}}</DomainName>
 
 				<SPA>off</SPA>
-				<SSL>on</SSL>
+				<Encryption>{{smtpenc}}</Encryption>
 				<AuthRequired>on</AuthRequired>
 			</Protocol>
 		</Account>
