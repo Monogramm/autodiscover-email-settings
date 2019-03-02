@@ -14,7 +14,7 @@ autodiscover            IN      A      {{$AUTODISCOVER_IP}}
 imap                    IN      CNAME  {{$MX_DOMAIN}}.
 smtp                    IN      CNAME  {{$MX_DOMAIN}}.
 @                       IN      MX 10  {{$MX_DOMAIN}}.
-@                       IN      TXT     "mailconf=https://autoconfig.{{$DOMAIN}}/mail/config-v1.1.xml"
+@                       IN      TXT    "mailconf=https://autoconfig.{{$DOMAIN}}/mail/config-v1.1.xml"
 _imaps._tcp             IN      SRV    0 0 993 {{MX_DOMAIN}}.
 _submission._tcp        IN      SRV    0 0 465 {{MX_DOMAIN}}.
 _autodiscover._tcp      IN      SRV    0 0 443 autodiscover.{{$DOMAIN}}.
