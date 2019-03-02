@@ -22,7 +22,7 @@
 			<key>IncomingMailServerPortNumber</key>
 			<integer>{{imap.port}}</integer>
 			<key>IncomingMailServerUseSSL</key>
-			{{inssl}}
+			<{{inssl}}/>
 			<key>IncomingMailServerUsername</key>
 			<string>{{email}}</string>
 			<key>OutgoingMailServerAuthentication</key>
@@ -32,7 +32,7 @@
 			<key>OutgoingMailServerPortNumber</key>
 			<integer>{{smtp.port}}</integer>
 			<key>OutgoingMailServerUseSSL</key>
-			{{outssl}}
+			<{{outssl}}/>
 			<key>OutgoingMailServerUsername</key>
 			<string>{{email}}</string>
 			<key>OutgoingPasswordSameAsIncomingPassword</key>

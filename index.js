@@ -57,8 +57,8 @@ router.get('/email.mobileconfig', function *autoconfig() {
 	const domain	= email.split('@').pop();
 	const filename	= `${domain}.mobileconfig`;
 	
-	const inssl	    = settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? '<true/>' : '<false/>';
-	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? '<true/>' : '<false/>';
+	const inssl	    = settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
+	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
 
 	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
 	this.set('Content-Disposition', `attachment; filename="${filename}"`);
