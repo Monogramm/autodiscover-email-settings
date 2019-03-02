@@ -1,4 +1,4 @@
-FROM node:8.9.2-alpine
+FROM node:8-alpine
 
 EXPOSE 8000
 WORKDIR /app
