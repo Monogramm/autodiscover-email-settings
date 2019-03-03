@@ -21,12 +21,21 @@ router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 
 	const request	= findChild('Request', this.request.body.root.children);
 	const schema	= findChild('AcceptableResponseSchema', request.children);
-	const email		= findChild('EMailAddress', request.children).content;
-	const username	= email.split('@')[0];
-	const domain	= email.split('@')[1];
 
-	const imapenc   = settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
-	const smtpenc   = settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
+	let email		= findChild('EMailAddress', request.children).content;
+	let username;
+	let domain;
+	if (~email.indexOf('@') ) {
+		username	= email.split('@')[0];
+		domain		= email.split('@')[1];
+	} else {
+		username	= email;
+		domain		= settings.domain;
+		email		= username + '@' + domain;
+	}
+
+	const imapenc	= settings.imap.socket == 'STARTTLS' ? 'TLS' : settings.imap.socket;
+	const smtpenc	= settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
 
 	yield this.render('autodiscover', {
 		schema: schema.content,
@@ -44,20 +53,30 @@ router.get('/mail/config-v1.1.xml', function *autoconfig() {
 	yield this.render('autoconfig');
 });
 
-// iOS / Apple Mail (/email.mobileconfig?email=username@domain.com)
+// iOS / Apple Mail (/email.mobileconfig?email=username@domain.com or /email.mobileconfig?email=username)
 router.get('/email.mobileconfig', function *autoconfig() {
-	const email = this.request.query.email;
+	let email = this.request.query.email;
 
-	if (!email || !~email.indexOf('@')) {
+	if (!email) {
 		this.status = 400;
 
 		return;
 	}
 
-	const domain	= email.split('@').pop();
+	let username;
+	let domain;
+	if (~email.indexOf('@') ) {
+		username	= email.split('@')[0];
+		domain		= email.split('@')[1];
+	} else {
+		username	= email;
+		domain		= settings.domain;
+		email		= username + '@' + domain;
+	}
+
 	const filename	= `${domain}.mobileconfig`;
 
-	const inssl	    = settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
+	const inssl		= settings.imap.socket == 'SSL' || settings.imap.socket == 'STARTTLS' ? 'true' : 'false';
 	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
 
 	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
@@ -65,6 +84,7 @@ router.get('/email.mobileconfig', function *autoconfig() {
 
 	yield this.render('mobileconfig', {
 		email,
+		username,
 		domain,
 		inssl,
 		outssl

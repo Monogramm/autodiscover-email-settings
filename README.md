@@ -92,7 +92,7 @@ Inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but wit
 
 The above autoconfiguration methods assume the following:
 
-* Username: `{{email}}` (Entire email address)
+* If username does not contain `@`, full email address will be generated based on domain settings
 
 ### Links
 
