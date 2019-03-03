@@ -43,13 +43,16 @@ services:
   autodiscover-domain-com:
     image: weboaks/autodiscover-email-settings:latest
     environment:
-    - DOMAIN=domain.com
-    - IMAP_HOST=imap.domain.com
-    - IMAP_PORT=993
-    - IMAP_SOCKET=SSL
-    - SMTP_HOST=smtp.domain.com
-    - SMTP_PORT=587
-    - SMTP_SOCKET=STARTTLS
+      - DOMAIN=domain.com
+      - IMAP_HOST=imap.domain.com
+      - IMAP_PORT=993
+      - IMAP_SOCKET=SSL
+      - SMTP_HOST=smtp.domain.com
+      - SMTP_PORT=587
+      - SMTP_SOCKET=STARTTLS
+      - PROFILE_IDENTIFIER=com.domain.autodiscover
+      - PROFILE_UUID=48C88203-4DB9-49E8-B593-4831903605A0
+      - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
     labels:
       - "traefik.port=8000"
       - "traefik.frontend.rule=Host:autoconfig.domain.com,autodiscover.domain.com"
@@ -64,13 +67,16 @@ services:
   autodiscover-domain-com:
     image: weboaks/autodiscover-email-settings:latest
     environment:
-    - DOMAIN=domain.com
-    - IMAP_HOST=imap.domain.com
-    - IMAP_PORT=993
-    - IMAP_SOCKET=SSL
-    - SMTP_HOST=smtp.domain.com
-    - SMTP_PORT=587
-    - SMTP_SOCKET=STARTTLS
+      - DOMAIN=domain.com
+      - IMAP_HOST=imap.domain.com
+      - IMAP_PORT=993
+      - IMAP_SOCKET=SSL
+      - SMTP_HOST=smtp.domain.com
+      - SMTP_PORT=587
+      - SMTP_SOCKET=STARTTLS
+      - PROFILE_IDENTIFIER=com.domain.autodiscover
+      - PROFILE_UUID=48C88203-4DB9-49E8-B593-4831903605A0
+      - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
     deploy:
       replicas: 1
       labels:

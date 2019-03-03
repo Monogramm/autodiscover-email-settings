@@ -24,7 +24,7 @@ router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 	const email		= findChild('EMailAddress', request.children).content;
 	const username	= email.split('@')[0];
 	const domain	= email.split('@')[1];
-	
+
 	const imapenc   = settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
 	const smtpenc   = settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
 
@@ -56,7 +56,7 @@ router.get('/email.mobileconfig', function *autoconfig() {
 
 	const domain	= email.split('@').pop();
 	const filename	= `${domain}.mobileconfig`;
-	
+
 	const inssl	    = settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
 	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
 

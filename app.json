@@ -35,6 +35,18 @@
 		"SMTP_SOCKET": {
 			"description": "Your SMTP Socket",
 			"value": "STARTTLS"
+		},
+		"PROFILE_IDENTIFIER": {
+			"description": "Your mobile profile identifier",
+			"value": "com.example.autodiscover"
+		},
+		"PROFILE_UUID": {
+			"description": "Your mobile profile globally unique ID",
+			"value": "48C88203-4DB9-49E8-B593-4831903605A0"
+		},
+		"MAIL_UUID": {
+			"description": "Your mail profile globally unique ID",
+			"value": "7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC"
 		}
 	}
 }
