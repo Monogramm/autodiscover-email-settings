@@ -27,6 +27,32 @@
         body {
             padding-top: 3.5rem;
             position: relative;
+
+            transition: background-color .1s ease-in-out, color .1s ease-in-out;
+        }
+
+        body.dark {
+            background-color: #222;
+            color: #fcfcfc;
+        }
+
+        .dark .card,
+        .dark .jumbotron {
+            background-color: #333;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+        }
+
+        .dark hr {
+            border-top: 1px solid rgba(255, 255, 255, 0.13);
+        }
+
+        .dark .text-dark {
+            color: #fff !important;
+        }
+
+        .dark a.text-dark:focus,
+        .dark a.text-dark:hover {
+            color: #fff !important;
         }
 
         .form-mobileconfig {
@@ -146,10 +172,26 @@
                 copyTextToClipboard(dom.innerText);
             }
         }
+
+        function getCookie(cname) {
+            let name = cname + '=';
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return null;
+        }
     </script>
 </head>
 
-<body id="body" data-spy="scroll" data-target="#navbar-main">
+<body id="body" data-spy="scroll" data-target="#navbar-main" class="light">
     <nav id="navbar-main" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">{{info.name}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsDefault"
@@ -310,6 +352,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
         crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript ================================================== -->
+    <script>
+        const mainThemeCookie = "main_theme";
+        let bodyClass;
+        if (document.cookie) {
+            bodyClass = getCookie(mainThemeCookie);
+        }
+        if (!!!bodyClass) {
+            bodyClass = "light";
+        }
+        document.getElementById('body').className = bodyClass;
+    </script>
 </body>
 
 </html>
