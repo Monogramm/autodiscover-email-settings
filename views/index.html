@@ -55,6 +55,23 @@
             color: #fff !important;
         }
 
+        svg.theme-switch {
+            fill: #fc0;
+        }
+
+        svg.theme-switch .shadow {
+            fill: #343a4000;
+            transition: fill .1s ease-in-out, content .1s ease-in-out;
+        }
+
+        .dark svg.theme-switch {
+            fill: #cac9c5;
+        }
+
+        .dark svg.theme-switch .shadow {
+            fill: #343a40;
+        }
+
         .form-mobileconfig {
             max-width: 420px;
             padding: 15px;
@@ -174,11 +191,11 @@
         }
 
         function getCookie(cname) {
-            let name = cname + '=';
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
+            var name = cname + '=';
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
                 while (c.charAt(0) == ' ') {
                     c = c.substring(1);
                 }
@@ -187,6 +204,29 @@
                 }
             }
             return null;
+        }
+
+        function setTheme(theme) {
+            // One month duration
+            const defaultDuration = 1000 * 60 * 60 * 24 * 31;
+            const expiry = new Date(Date.now() + defaultDuration);
+            const mainThemeCookie = "main_theme";
+            document.cookie = mainThemeCookie + '=' + theme + '; expires=' + expiry.toGMTString();
+            document.getElementById('body').className = theme;
+        }
+
+        function switchTheme() {
+            var forceSide = document.getElementById('body').className;
+
+            if (forceSide === 'light') {
+                console.log('Come to the dark side! We have cookies!');
+                forceSide = 'dark';
+            } else {
+                console.log('I find your lack of faith disturbing.');
+                forceSide = 'light';
+            }
+
+            setTheme(forceSide);
         }
     </script>
 </head>
@@ -200,7 +240,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsDefault">
-            <ul class="navbar-nav mr-autonav-tabs" role="tablist">
+            <ul class="navbar-nav mr-autonav-tabs mr-auto" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link" href="#autodiscover">Outlook / Apple Mail</a>
                 </li>
@@ -214,6 +254,18 @@
                     <a class="nav-link" href="#manualconfig">Manual configuration</a>
                 </li>
             </ul>
+
+            <div class="mt-2 mt-md-0 align-items-center">
+                <a class="text-muted" href="#" onclick="switchTheme();">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="theme-switch" width="30" height="30"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img"
+                        viewBox="0 0 24 24" focusable="false">
+                        <title>Switch theme</title>
+                        <circle cx="12.5" cy="12.5" r="10"></circle>
+                        <circle cx="5" cy="12.5" r="10" class="shadow"></circle>
+                    </svg>
+                </a>
+            </div>
         </div>
     </nav>
 
