@@ -105,7 +105,7 @@ router.get('/email.mobileconfig', function *autoconfig() {
 
 // Generic support page
 router.get('/', function *index() {
-	yield this.render('index');
+	yield this.render('index.html');
 });
 
 app.context.render = swig({
