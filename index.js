@@ -7,29 +7,36 @@ const body		= require('koa-buddy');
 const router	= require('koa-router')();
 const settings	= require('./settings.js');
 
-function findChild(name, children) {
+function findChild(name, children, def = null) {
 	for (let child of children) {
 		if (child.name === name) {
 			return child;
 		}
 	}
+	return def;
 }
 
 // Microsoft Outlook / Apple Mail
-router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
+function *autodiscover() {
 	this.set('Content-Type', 'application/xml');
 
-	const request	= findChild('Request', this.request.body.root.children);
-	const schema	= findChild('AcceptableResponseSchema', request.children);
+	const request	= this.request.body.root ? findChild('Request', this.request.body.root.children) : null;
+	const schema	= request !== null ? findChild('AcceptableResponseSchema', request.children) : null;
+	const xmlns		= schema !== null ? schema.content : 'http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006';
 
-	let email		= findChild('EMailAddress', request.children).content;
+	let email		= request !== null ? findChild('EMailAddress', request.children) : null;
 	let username;
 	let domain;
-	if (~email.indexOf('@') ) {
+	if ( email === null || email.content === null ) {
+		email		= '';
+		username	= '';
+		domain		= settings.domain;
+	} else if ( ~email.indexOf('@') ) {
+		email		= email.content;
 		username	= email.split('@')[0];
 		domain		= email.split('@')[1];
 	} else {
-		username	= email;
+		username	= email.content;
 		domain		= settings.domain;
 		email		= username + '@' + domain;
 	}
@@ -38,14 +45,19 @@ router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
 	const smtpenc	= settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
 
 	yield this.render('autodiscover', {
-		schema: schema.content,
+		schema: xmlns,
 		email,
 		username,
 		domain,
 		imapenc,
 		smtpenc
 	});
-});
+}
+
+router.get('/autodiscover/autodiscover.xml', autodiscover);
+router.post('/autodiscover/autodiscover.xml', autodiscover);
+router.get('/Autodiscover/Autodiscover.xml', autodiscover);
+router.post('/Autodiscover/Autodiscover.xml', autodiscover);
 
 // Thunderbird
 router.get('/mail/config-v1.1.xml', function *autoconfig() {

@@ -46,7 +46,7 @@
 			<key>disableMailRecentsSyncing</key>
 			<false/>
 			<key>PayloadDescription</key>
-			<string>Configure Email Settings</string>
+			<string>{{info.name}} Email</string>
 			<key>PayloadDisplayName</key>
 			<string>{{email}}</string>
 			<key>PayloadIdentifier</key>
@@ -60,7 +60,7 @@
 		</dict>
 	</array>
 	<key>PayloadDescription</key>
-	<string>Configure Mobile Settings</string>
+	<string>{{info.name}}</string>
 	<key>PayloadDisplayName</key>
 	<string>{{email}}</string>
 	<key>PayloadIdentifier</key>

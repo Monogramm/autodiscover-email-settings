@@ -1,4 +1,8 @@
 module.exports = {
+	info: {
+		name: process.env.COMPANY,
+		url: process.env.SUPPORT_URL
+	},
 	domain: process.env.DOMAIN,
 	imap: {
 		host: process.env.IMAP_HOST,

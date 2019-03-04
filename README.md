@@ -43,6 +43,8 @@ services:
   autodiscover-domain-com:
     image: weboaks/autodiscover-email-settings:latest
     environment:
+      - COMPANY=Company
+      - SUPPORT_URL=https://support.domain.com
       - DOMAIN=domain.com
       - IMAP_HOST=imap.domain.com
       - IMAP_PORT=993
@@ -67,6 +69,8 @@ services:
   autodiscover-domain-com:
     image: weboaks/autodiscover-email-settings:latest
     environment:
+      - COMPANY=Company
+      - SUPPORT_URL=https://support.domain.com
       - DOMAIN=domain.com
       - IMAP_HOST=imap.domain.com
       - IMAP_PORT=993
@@ -98,7 +102,7 @@ The above autoconfiguration methods assume the following:
 
 * Mozilla [Autoconfig configuration](https://developer.mozilla.org/en-US/docs/Mozilla/Thunderbird/Autoconfiguration/FileFormat/HowTo)
 * Microsoft [Exchange Command Reference](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-ascmd/1a3490f1-afe1-418a-aa92-6f630036d65a)
-* Apple [ConfigurationProfile reference](https://developer.apple.com/business/documentation/Configuration-Profile-Reference.pdf)
+* Apple [ConfigurationProfile reference](https://developer.apple.com/library/archive/featuredarticles/iPhoneConfigurationProfileRef/index.html)
 
 ### License
 

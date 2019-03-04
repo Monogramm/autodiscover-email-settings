@@ -8,6 +8,14 @@
 		"papertrail"
 	],
 	"env": {
+		"COMPANY": {
+			"description": "Your company name",
+			"value": "Example"
+		},
+		"SUPPORT_URL": {
+			"description": "Your company support URL",
+			"value": "autodiscover.example.com"
+		},
 		"DOMAIN": {
 			"description": "Your default domain",
 			"value": "example.com"
