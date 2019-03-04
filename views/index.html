@@ -109,6 +109,44 @@
             box-shadow: 0px 0px 3px 2px #28a7459d;
         }
     </style>
+
+    <script>
+        function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Fallback: Copying text command was ' + msg);
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+        function copyTextToClipboard(text) {
+            if (!navigator.clipboard) {
+                fallbackCopyTextToClipboard(text);
+                return;
+            }
+            navigator.clipboard.writeText(text).then(function () {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function (err) {
+                console.error('Async: Could not copy text: ', err);
+            });
+        }
+
+        function copy(domId) {
+            let dom = document.getElementById(domId);
+            if (dom) {
+                copyTextToClipboard(dom.innerText);
+            }
+        }
+    </script>
 </head>
 
 <body id="body" data-spy="scroll" data-target="#navbar-main">
@@ -171,8 +209,10 @@
                 </div>
                 <div class="col-md-4 mt-2 mb-4">
                     <h2 class="h2">iOS</h2>
-                    <p>You can easily configure your Apple Mobile devices (<em>iPhone / iPad</em>) with a simple form.</p>
-                    <p><a class="btn btn-secondary" href="#mobileconfig" role="button">Apple Configuration Profile &raquo</a></p>
+                    <p>You can easily configure your Apple Mobile devices (<em>iPhone / iPad</em>) with a simple form.
+                    </p>
+                    <p><a class="btn btn-secondary" href="#mobileconfig" role="button">Apple Configuration Profile
+                            &raquo</a></p>
                 </div>
             </div>
 
@@ -217,24 +257,34 @@
                     <div class="col-md-6">
                         <h5 id="manualconfig-imap">Incoming server (IMAP)</h5>
                         <dl>
-                            <dt>Hostname</dt>
-                            <dd>{{imap.host}}</dd>
-                            <dt>Port</dt>
-                            <dd>{{imap.port}}</dd>
-                            <dt>Encryption</dt>
-                            <dd>{{imap.socket}}</dd>
+                            <dt>Hostname <button class="btn btn-sm btn-secondary"
+                                    onclick="copy('manualconfig-imap-hostname');">Copy</button></dt>
+                            <dd id="manualconfig-imap-hostname">{{imap.host}}</dd>
+
+                            <dt>Port <button class="btn btn-sm btn-secondary"
+                                    onclick="copy('manualconfig-imap-port');">Copy</button></dt>
+                            <dd id="manualconfig-imap-port">{{imap.port}}</dd>
+
+                            <dt>Encryption <button class="btn btn-sm btn-secondary"
+                                    onclick="copy('manualconfig-imap-socket');">Copy</button></dt>
+                            <dd id="manualconfig-imap-socket">{{imap.socket}}</dd>
                         </dl>
                     </div>
 
                     <div class="col-md-6">
                         <h5 id="manualconfig-smtp">Outgoing server (SMTP)</h5>
                         <dl>
-                            <dt>Hostname</dt>
-                            <dd>{{smtp.host}}</dd>
-                            <dt>Port</dt>
-                            <dd>{{smtp.port}}</dd>
-                            <dt>Encryption</dt>
-                            <dd>{{smtp.socket}}</dd>
+                            <dt>Hostname <button class="btn btn-sm btn-secondary"
+                                    onclick="copy('manualconfig-smtp-hostname');">Copy</button></dt>
+                            <dd id="manualconfig-smtp-hostname">{{smtp.host}}</dd>
+
+                            <dt>Port <button class="btn btn-sm btn-secondary"
+                                    onclick="copy('manualconfig-smtp-port');">Copy</button></dt>
+                            <dd id="manualconfig-smtp-port">{{smtp.port}}</dd>
+
+                            <dt>Encryption <button class="btn btn-sm btn-secondary"
+                                    onclick="copy('manualconfig-smtp-socket');">Copy</button></dt>
+                            <dd id="manualconfig-smtp-socket">{{smtp.socket}}</dd>
                         </dl>
                     </div>
                 </div>
