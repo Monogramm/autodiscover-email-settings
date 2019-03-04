@@ -103,6 +103,11 @@ router.get('/email.mobileconfig', function *autoconfig() {
 	});
 });
 
+// Generic support page
+router.get('/', function *index() {
+	yield this.render('index');
+});
+
 app.context.render = swig({
 	root: path.join(__dirname, 'views'),
 	autoescape: true,

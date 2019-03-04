@@ -5,6 +5,7 @@
 This service is created to autodiscover your provider email settings.
 
 It provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
+A simple support page is also available at the root of the autodiscover domain.
 
 ### DNS settings
 
@@ -103,6 +104,8 @@ The above autoconfiguration methods assume the following:
 * Mozilla [Autoconfig configuration](https://developer.mozilla.org/en-US/docs/Mozilla/Thunderbird/Autoconfiguration/FileFormat/HowTo)
 * Microsoft [Exchange Command Reference](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-ascmd/1a3490f1-afe1-418a-aa92-6f630036d65a)
 * Apple [ConfigurationProfile reference](https://developer.apple.com/library/archive/featuredarticles/iPhoneConfigurationProfileRef/index.html)
+
+* [Bootstrap 4.2](https://getbootstrap.com/docs/4.2), [jQuery](https://jquery.com/) and [Popper.js](https://popper.js.org/) used for default support page
 
 ### License
 
