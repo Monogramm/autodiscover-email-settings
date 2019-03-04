@@ -105,7 +105,7 @@ The above autoconfiguration methods assume the following:
 * Microsoft [Exchange Command Reference](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-ascmd/1a3490f1-afe1-418a-aa92-6f630036d65a)
 * Apple [ConfigurationProfile reference](https://developer.apple.com/library/archive/featuredarticles/iPhoneConfigurationProfileRef/index.html)
 
-* [Bootstrap 4.2](https://getbootstrap.com/docs/4.2), [jQuery](https://jquery.com/) and [Popper.js](https://popper.js.org/) used for default support page
+* [Bootstrap](https://getbootstrap.com/), [jQuery](https://jquery.com/) and [Popper.js](https://popper.js.org/) used for default support page
 
 ### License
 
