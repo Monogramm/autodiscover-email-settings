@@ -44,7 +44,7 @@ services:
   autodiscover-domain-com:
     image: weboaks/autodiscover-email-settings:latest
     environment:
-      - COMPANY=Company
+      - COMPANY_NAME=Company
       - SUPPORT_URL=https://autodiscover.domain.com
       - DOMAIN=domain.com
       - IMAP_HOST=imap.domain.com
@@ -70,7 +70,7 @@ services:
   autodiscover-domain-com:
     image: weboaks/autodiscover-email-settings:latest
     environment:
-      - COMPANY=Company
+      - COMPANY_NAME=Company
       - SUPPORT_URL=https://autodiscover.domain.com
       - DOMAIN=domain.com
       - IMAP_HOST=imap.domain.com

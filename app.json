@@ -8,9 +8,9 @@
 		"papertrail"
 	],
 	"env": {
-		"COMPANY": {
+		"COMPANY_NAME": {
 			"description": "Your company name",
-			"value": "Example"
+			"value": "Autodiscover"
 		},
 		"SUPPORT_URL": {
 			"description": "Your company support URL",

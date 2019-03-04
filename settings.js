@@ -1,6 +1,6 @@
 module.exports = {
 	info: {
-		name: process.env.COMPANY,
+		name: process.env.COMPANY_NAME,
 		url: process.env.SUPPORT_URL
 	},
 	domain: process.env.DOMAIN,
