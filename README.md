@@ -45,7 +45,7 @@ services:
     image: weboaks/autodiscover-email-settings:latest
     environment:
       - COMPANY=Company
-      - SUPPORT_URL=https://support.domain.com
+      - SUPPORT_URL=https://autodiscover.domain.com
       - DOMAIN=domain.com
       - IMAP_HOST=imap.domain.com
       - IMAP_PORT=993
@@ -71,7 +71,7 @@ services:
     image: weboaks/autodiscover-email-settings:latest
     environment:
       - COMPANY=Company
-      - SUPPORT_URL=https://support.domain.com
+      - SUPPORT_URL=https://autodiscover.domain.com
       - DOMAIN=domain.com
       - IMAP_HOST=imap.domain.com
       - IMAP_PORT=993
