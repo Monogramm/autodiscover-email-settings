@@ -20,11 +20,20 @@ function findChild(name, children, def = null) {
 function *autodiscover() {
 	this.set('Content-Type', 'application/xml');
 
-	const request	= this.request.body.root ? findChild('Request', this.request.body.root.children) : null;
-	const schema	= request !== null ? findChild('AcceptableResponseSchema', request.children) : null;
-	const xmlns		= schema !== null ? schema.content : 'http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006';
+	const request	= this.request.body && this.request.body.root ? 
+		findChild('Request', this.request.body.root.children) : 
+		null;
+	const schema	= request !== null ? 
+		findChild('AcceptableResponseSchema', request.children) : 
+		null;
+	const xmlns		= schema !== null ? 
+		schema.content : 
+		'http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006';
 
-	let email		= request !== null ? findChild('EMailAddress', request.children) : null;
+	let email		= request !== null ? 
+		findChild('EMailAddress', request.children) : 
+		null;
+
 	let username;
 	let domain;
 	if ( email === null || email.content === null ) {
