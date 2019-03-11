@@ -1,5 +1,7 @@
 FROM node:8-alpine
 
+LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
+
 EXPOSE 8000
 WORKDIR /app
 COPY package.json yarn.lock index.js settings.js /app/

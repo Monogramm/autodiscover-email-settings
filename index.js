@@ -7,31 +7,66 @@ const body		= require('koa-buddy');
 const router	= require('koa-router')();
 const settings	= require('./settings.js');
 
-function findChild(name, children) {
+function findChild(name, children, def = null) {
 	for (let child of children) {
 		if (child.name === name) {
 			return child;
 		}
 	}
+	return def;
 }
 
 // Microsoft Outlook / Apple Mail
-router.post('/Autodiscover/Autodiscover.xml', function *autodiscover() {
+function *autodiscover() {
 	this.set('Content-Type', 'application/xml');
 
-	const request	= findChild('Request', this.request.body.root.children);
-	const schema	= findChild('AcceptableResponseSchema', request.children);
-	const email		= findChild('EMailAddress', request.children).content;
-	const username	= email.split('@')[0];
-	const domain	= email.split('@')[1];
+	const request	= this.request.body && this.request.body.root ? 
+		findChild('Request', this.request.body.root.children) : 
+		null;
+	const schema	= request !== null ? 
+		findChild('AcceptableResponseSchema', request.children) : 
+		null;
+	const xmlns		= schema !== null ? 
+		schema.content : 
+		'http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006';
+
+	let email		= request !== null ? 
+		findChild('EMailAddress', request.children) : 
+		null;
+
+	let username;
+	let domain;
+	if ( email === null || email.content === null ) {
+		email		= '';
+		username	= '';
+		domain		= settings.domain;
+	} else if ( ~email.indexOf('@') ) {
+		email		= email.content;
+		username	= email.split('@')[0];
+		domain		= email.split('@')[1];
+	} else {
+		username	= email.content;
+		domain		= settings.domain;
+		email		= username + '@' + domain;
+	}
+
+	const imapenc	= settings.imap.socket == 'STARTTLS' ? 'TLS' : settings.imap.socket;
+	const smtpenc	= settings.smtp.socket == 'STARTTLS' ? 'TLS' : settings.smtp.socket;
 
 	yield this.render('autodiscover', {
-		schema: schema.content,
+		schema: xmlns,
 		email,
 		username,
-		domain
+		domain,
+		imapenc,
+		smtpenc
 	});
-});
+}
+
+router.get('/autodiscover/autodiscover.xml', autodiscover);
+router.post('/autodiscover/autodiscover.xml', autodiscover);
+router.get('/Autodiscover/Autodiscover.xml', autodiscover);
+router.post('/Autodiscover/Autodiscover.xml', autodiscover);
 
 // Thunderbird
 router.get('/mail/config-v1.1.xml', function *autoconfig() {
@@ -39,26 +74,47 @@ router.get('/mail/config-v1.1.xml', function *autoconfig() {
 	yield this.render('autoconfig');
 });
 
-// iOS / Apple Mail (/email.mobileconfig?email=username@domain.com)
+// iOS / Apple Mail (/email.mobileconfig?email=username@domain.com or /email.mobileconfig?email=username)
 router.get('/email.mobileconfig', function *autoconfig() {
-	const email = this.request.query.email;
+	let email = this.request.query.email;
 
-	if (!email || !~email.indexOf('@')) {
+	if (!email) {
 		this.status = 400;
 
 		return;
 	}
 
-	const domain	= email.split('@').pop();
+	let username;
+	let domain;
+	if (~email.indexOf('@') ) {
+		username	= email.split('@')[0];
+		domain		= email.split('@')[1];
+	} else {
+		username	= email;
+		domain		= settings.domain;
+		email		= username + '@' + domain;
+	}
+
 	const filename	= `${domain}.mobileconfig`;
+
+	const inssl		= settings.imap.socket == 'SSL' || settings.imap.socket == 'STARTTLS' ? 'true' : 'false';
+	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
 
 	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
 	this.set('Content-Disposition', `attachment; filename="${filename}"`);
 
 	yield this.render('mobileconfig', {
 		email,
-		domain
+		username,
+		domain,
+		inssl,
+		outssl
 	});
+});
+
+// Generic support page
+router.get('/', function *index() {
+	yield this.render('index.html');
 });
 
 app.context.render = swig({

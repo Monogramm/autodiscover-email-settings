@@ -8,6 +8,14 @@
 		"papertrail"
 	],
 	"env": {
+		"COMPANY_NAME": {
+			"description": "Your company name",
+			"value": "Autodiscover"
+		},
+		"SUPPORT_URL": {
+			"description": "Your company support URL",
+			"value": "autodiscover.example.com"
+		},
 		"DOMAIN": {
 			"description": "Your default domain",
 			"value": "example.com"
@@ -17,16 +25,36 @@
 			"value": "imap.example.com"
 		},
 		"IMAP_PORT": {
-			"description": "Your Secure IMAP Port",
+			"description": "Your IMAP Port",
 			"value": "993"
+		},
+		"IMAP_SOCKET": {
+			"description": "Your IMAP Socket",
+			"value": "SSL"
 		},
 		"SMTP_HOST": {
 			"description": "Your SMTP Host",
 			"value": "smtp.example.com"
 		},
 		"SMTP_PORT": {
-			"description": "Your Secure SMTP Port",
+			"description": "Your SMTP Port",
 			"value": "587"
+		},
+		"SMTP_SOCKET": {
+			"description": "Your SMTP Socket",
+			"value": "STARTTLS"
+		},
+		"PROFILE_IDENTIFIER": {
+			"description": "Your mobile profile identifier",
+			"value": "com.example.autodiscover"
+		},
+		"PROFILE_UUID": {
+			"description": "Your mobile profile globally unique ID",
+			"value": "48C88203-4DB9-49E8-B593-4831903605A0"
+		},
+		"MAIL_UUID": {
+			"description": "Your mail profile globally unique ID",
+			"value": "7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC"
 		}
 	}
 }

@@ -3,13 +3,13 @@
 	<emailProvider id="{{domain}}">
 	    <domain>{{domain}}</domain>
 
-	    <displayName>%EMAILADDRESS%</displayName>
+	    <displayName>{{info.name}} Email</displayName>
 	    <displayShortName>%EMAILLOCALPART%</displayShortName>
 
 	    <incomingServer type="imap">
 				<hostname>{{imap.host}}</hostname>
 				<port>{{imap.port}}</port>
-				<socketType>SSL</socketType>
+				<socketType>{{imap.socket}}</socketType>
 				<authentication>password-cleartext</authentication>
 				<username>%EMAILADDRESS%</username>
 			</incomingServer>
@@ -17,9 +17,15 @@
 	    <outgoingServer type="smtp">
 				<hostname>{{smtp.host}}</hostname>
 				<port>{{smtp.port}}</port>
-				<socketType>SSL</socketType>
+				<socketType>{{smtp.socket}}</socketType>
 				<authentication>password-cleartext</authentication>
 				<username>%EMAILADDRESS%</username>
 	    </outgoingServer>
+
+			<documentation url="{{info.url}}">
+				<descr lang="fr">Description des paramètres</descr>
+				<descr lang="de">Allgemeine Beschreibung der Einstellungen</descr>
+				<descr lang="en">Generic settings page</descr>
+			</documentation>
 	</emailProvider>
 </clientConfig>

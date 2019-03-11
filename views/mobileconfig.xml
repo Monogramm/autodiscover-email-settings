@@ -22,9 +22,11 @@
 			<key>IncomingMailServerPortNumber</key>
 			<integer>{{imap.port}}</integer>
 			<key>IncomingMailServerUseSSL</key>
-			<true/>
+			<{{inssl}}/>
 			<key>IncomingMailServerUsername</key>
 			<string>{{email}}</string>
+			<key>OutgoingPasswordSameAsIncomingPassword</key>
+			<true/>
 			<key>OutgoingMailServerAuthentication</key>
 			<string>EmailAuthPassword</string>
 			<key>OutgoingMailServerHostName</key>
@@ -32,37 +34,37 @@
 			<key>OutgoingMailServerPortNumber</key>
 			<integer>{{smtp.port}}</integer>
 			<key>OutgoingMailServerUseSSL</key>
-			<true/>
+			<{{outssl}}/>
 			<key>OutgoingMailServerUsername</key>
 			<string>{{email}}</string>
-			<key>OutgoingPasswordSameAsIncomingPassword</key>
-			<true/>
-			<key>PayloadDescription</key>
-			<string>Configure Email Settings</string>
-			<key>PayloadDisplayName</key>
-			<string>{{email}}</string>
-			<key>PayloadIdentifier</key>
-			<string>com.tiliq.autodiscover.com.apple.mail.managed.7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC</string>
-			<key>PayloadType</key>
-			<string>com.apple.mail.managed</string>
-			<key>PayloadUUID</key>
-			<string>7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC</string>
-			<key>PayloadVersion</key>
-			<real>1</real>
+			<key>SMIMEEnabled</key>
+			<false/>
 			<key>SMIMEEnablePerMessageSwitch</key>
 			<false/>
-			<key>SMIMEEnabled</key>
+			<key>SMIMEEnableEncryptionPerMessageSwitch</key>
 			<false/>
 			<key>disableMailRecentsSyncing</key>
 			<false/>
+			<key>PayloadDescription</key>
+			<string>{{info.name}} Email</string>
+			<key>PayloadDisplayName</key>
+			<string>{{email}}</string>
+			<key>PayloadIdentifier</key>
+			<string>{{mobile.identifier}}.com.apple.mail.managed.{{mobile.mail.uuid}}</string>
+			<key>PayloadType</key>
+			<string>com.apple.mail.managed</string>
+			<key>PayloadUUID</key>
+			<string>{{mobile.mail.uuid}}</string>
+			<key>PayloadVersion</key>
+			<real>1</real>
 		</dict>
 	</array>
 	<key>PayloadDescription</key>
-	<string>Configure Email Settings</string>
+	<string>{{info.name}}</string>
 	<key>PayloadDisplayName</key>
 	<string>{{email}}</string>
 	<key>PayloadIdentifier</key>
-	<string>com.tiliq.autodiscover</string>
+	<string>{{mobile.identifier}}</string>
 	<key>PayloadOrganization</key>
 	<string>{{domain}}</string>
 	<key>PayloadRemovalDisallowed</key>
@@ -70,7 +72,7 @@
 	<key>PayloadType</key>
 	<string>Configuration</string>
 	<key>PayloadUUID</key>
-	<string>48C88203-4DB9-49E8-B593-4831903605A0</string>
+	<string>{{mobile.uuid}}</string>
 	<key>PayloadVersion</key>
 	<integer>1</integer>
 </dict>

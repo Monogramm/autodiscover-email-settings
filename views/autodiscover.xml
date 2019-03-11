@@ -2,12 +2,13 @@
 <Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
 	<Response xmlns="{{schema}}">
 		<User>
-			<DisplayName>{{email}}</DisplayName>
+			<DisplayName>{{info.name}} Email</DisplayName>
 		</User>
 
 		<Account>
 			<AccountType>email</AccountType>
 			<Action>settings</Action>
+			<ServiceHome>{{info.url}}</ServiceHome>
 
 			<Protocol>
 				<Type>IMAP</Type>
@@ -22,7 +23,7 @@
 				<DomainName>{{domain}}</DomainName>
 
 				<SPA>off</SPA>
-				<SSL>on</SSL>
+				<Encryption>{{imapenc}}</Encryption>
 				<AuthRequired>on</AuthRequired>
 			</Protocol>
 		</Account>
@@ -30,6 +31,7 @@
 		<Account>
 			<AccountType>email</AccountType>
 			<Action>settings</Action>
+			<ServiceHome>{{info.url}}</ServiceHome>
 
 			<Protocol>
 				<Type>SMTP</Type>
@@ -44,7 +46,7 @@
 				<DomainName>{{domain}}</DomainName>
 
 				<SPA>off</SPA>
-				<SSL>on</SSL>
+				<Encryption>{{smtpenc}}</Encryption>
 				<AuthRequired>on</AuthRequired>
 			</Protocol>
 		</Account>
