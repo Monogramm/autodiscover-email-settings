@@ -1,11 +1,12 @@
 # autodiscover-email-settings
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/weboaks/autodiscover-email-settings.svg)](https://hub.docker.com/r/weboaks/autodiscover-email-settings/) [![Docker layers](https://images.microbadger.com/badges/image/weboaks/autodiscover-email-settings.svg)](https://microbadger.com/images/weboaks/autodiscover-email-settings)
+[![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/autodiscover-email-settings.svg)](https://hub.docker.com/r/monogramm/autodiscover-email-settings/)
+[![Docker layers](https://images.microbadger.com/badges/image/monogramm/autodiscover-email-settings.svg)](https://microbadger.com/images/monogramm/autodiscover-email-settings)
 
 This service is created to autodiscover your provider email settings.
 
 It provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
-A simple support page is also available at the root of the autodiscover domain.
+**A simple support page is also available at the root of the autodiscover domain.**
 
 ### DNS settings
 
@@ -33,7 +34,8 @@ Replace above variables with data according to this table
 
 ### Usage
 
-[traefik](https://github.com/containous/traefik) can proxy your containers on docker, on docker swarm, and on a wide range of orchestrators
+[traefik](https://github.com/containous/traefik) can proxy your containers on docker, on docker swarm, and on a wide range of orchestrators.
+You can also achieve this with another proxy like [Nginx](https://www.nginx.com/) for instance.
 
 #### docker
 
@@ -42,7 +44,7 @@ version: '2'
 
 services:
   autodiscover-domain-com:
-    image: weboaks/autodiscover-email-settings:latest
+    image: monogramm/autodiscover-email-settings:latest
     environment:
       - COMPANY_NAME=Company
       - SUPPORT_URL=https://autodiscover.domain.com
@@ -68,7 +70,7 @@ version: '3'
 
 services:
   autodiscover-domain-com:
-    image: weboaks/autodiscover-email-settings:latest
+    image: monogramm/autodiscover-email-settings:latest
     environment:
       - COMPANY_NAME=Company
       - SUPPORT_URL=https://autodiscover.domain.com
@@ -91,7 +93,9 @@ services:
 
 ### Credits
 
-Inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but with https://github.com/Tiliq/autodiscover.xml instead of https://github.com/gronke/email-autodiscover to allow a much lighter ([![](https://images.microbadger.com/badges/image/weboaks/autodiscover-email-settings.svg)](https://microbadger.com/images/weboaks/autodiscover-email-settings)) image based of node on alpine instead of apache on debian ([![](https://images.microbadger.com/badges/image/jsmitsnl/docker-email-autodiscover.svg)](https://microbadger.com/images/jsmitsnl/docker-email-autodiscover))
+Inspired from https://github.com/sylvaindumont/autodiscover.xml, but without the few restrictions mentioned in the original project notes and with a simple support page to allow manual setup and iOS profile download.
+
+The original project was inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but with https://github.com/Tiliq/autodiscover.xml instead of https://github.com/gronke/email-autodiscover to allow a much lighter ([![](https://images.microbadger.com/badges/image/weboaks/autodiscover-email-settings.svg)](https://microbadger.com/images/weboaks/autodiscover-email-settings)) image based of node on alpine instead of apache on debian ([![](https://images.microbadger.com/badges/image/jsmitsnl/docker-email-autodiscover.svg)](https://microbadger.com/images/jsmitsnl/docker-email-autodiscover))
 
 ### Notes
 
