@@ -1,6 +1,6 @@
-FROM node:8-alpine
+FROM node:lts-alpine
 
-LABEL maintainer="Mathieu BRUNOT <mathieu.brunot at monogramm dot io>"
+LABEL maintainer="Monogramm Maintainers <opensource at monogramm dot io>"
 
 EXPOSE 8000
 WORKDIR /app
