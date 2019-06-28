@@ -242,10 +242,7 @@
         <div class="collapse navbar-collapse" id="navbarsDefault">
             <ul class="navbar-nav mr-autonav-tabs mr-auto" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" href="#autodiscover">Outlook / Apple Mail</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#autoconfig">Thunderbird</a>
+                    <a class="nav-link" href="#automatic">Automatic</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#mobileconfig">iOS</a>
@@ -272,7 +269,7 @@
     <main role="main">
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-3">{{info.name}} Email settings</h1>
+                <h1 class="display-4">{{info.name}} Email settings</h1>
                 <p class="lead">Generic settings support page</p>
                 <p>This is a simple support page for email automatic configuration service.
                     It provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig
@@ -284,32 +281,21 @@
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 mt-2 mb-4">
-                    <h2 id="autodiscover" class="h2">Outlook / Apple Mail</h2>
-                    <p>Creating a new email account with <em>Microsoft Outlook</em> or <em>Apple Mail</em> should be
-                        <a href="/autodiscover/autodiscover.xml"><strong>automatically configured</strong></a> with the
-                        recommended settings.</p>
-                    <p>If you encounter some issues during configuration, apply the manual configuration.</p>
-                    <p><a class="btn btn-secondary" href="#manualconfig" role="button">Manual
-                            configuration &raquo</a></p>
-                </div>
-                <div class="col-md-4 mt-2 mb-4">
-                    <h2 id="autoconfig" class="h2">Thunderbird</h2>
-                    <p>Creating a new email account with <em>Mozilla Thunderbird</em> should be
-                        <a href="/mail/config-v1.1.xml"><strong>automatically configured</strong></a> with the
-                        recommended settings.</p>
-                    <p>If you encounter some issues during configuration, apply the manual configuration.</p>
-                    <p><a class="btn btn-secondary" href="#manualconfig" role="button">Manual
-                            configuration &raquo</a></p>
-                </div>
-                <div class="col-md-4 mt-2 mb-4">
-                    <h2 class="h2">iOS</h2>
-                    <p>You can easily configure your Apple Mobile devices (<em>iPhone / iPad</em>) with a simple form.
-                    </p>
-                    <p><a class="btn btn-secondary" href="#mobileconfig" role="button">Apple Configuration Profile
-                            &raquo</a></p>
-                </div>
+            <h3 id="automatic" class="h3 font-weight-normal">Automatic settings</h3>
+
+            <div class="mb-5">
+                <p>Thanks to the <a href="/mail/config-v1.1.xml">autoconfig</a> and
+                    <a href="/autodiscover/autodiscover.xml">autodiscover</a> services,
+                    <strong>most of the recent mail clients</strong> (<em>Microsoft Outlook</em>, <em>Apple Mail</em>, 
+                    <em>Mozilla Thunderbird</em>, ...) <strong>should automatically be configured</strong> with the
+                    recommended settings for this email server just after entering your email address <code>@{{domain}}</code>.</p>
+
+                <p>If you encounter some issues, depending on your situation, you can either:</p>
+                <ul>
+                    <li>easily configure your Apple Mobile devices (<em>iPhone / iPad</em>) with
+                        <a href="#mobileconfig">this simple form</a></li>
+                    <li>enter manually the <a href="#manualconfig">email configuration</a></li>
+                </ul>
             </div>
 
             <hr>
@@ -318,10 +304,8 @@
 
         <div class="container">
             <h3 id="mobileconfig" class="h3 font-weight-normal">Apple Configuration Profile</h3>
-            <p><a class="btn btn-primary" data-toggle="collapse" href="#mobileconfig-collapse" aria-expanded="false"
-                    aria-controls="collapseMobileConfig" role="button">Form &raquo</a></p>
 
-            <div id="mobileconfig-collapse" class="mb-5 collapse">
+            <div id="mobileconfig" class="mb-5">
                 <p>Enter your username or full email address and click the download button to setup your Apple mobile
                     device.</p>
 
@@ -343,10 +327,8 @@
 
         <div class="container">
             <h3 id="manualconfig" class="h3 font-weight-normal">Manual configuration</h3>
-            <p><a class="btn btn-primary" data-toggle="collapse" href="#manualconfig-collapse" aria-expanded="false"
-                    aria-controls="collapseManualConfig" role="button">Details &raquo</a></p>
 
-            <div id="manualconfig-collapse" class="mb-5 collapse">
+            <div id="manualconfig" class="mb-5">
                 <p>Copy the following settings to your email application.</p>
 
                 <div class="row">
