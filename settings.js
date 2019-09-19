@@ -14,11 +14,23 @@ module.exports = {
 		port: process.env.SMTP_PORT,
 		socket: process.env.SMTP_SOCKET
 	},
+	ldap: {
+		host: process.env.LDAP_HOST,
+		port: process.env.LDAP_PORT,
+		socket: process.env.LDAP_SOCKET,
+		base: process.env.LDAP_BASE,
+		userfield: process.env.LDAP_USER_FIELD,
+		usersbase: process.env.LDAP_USER_BASE,
+		searchfilter: process.env.LDAP_SEARCH
+	},
 	mobile: {
 		identifier: process.env.PROFILE_IDENTIFIER,
 		uuid: process.env.PROFILE_UUID,
 		mail: {
 			uuid: process.env.MAIL_UUID,
+		},
+		ldap: {
+			uuid: process.env.LDAP_UUID,
 		}
 	}
 };

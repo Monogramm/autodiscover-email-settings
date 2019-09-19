@@ -269,13 +269,13 @@
     <main role="main">
         <div class="jumbotron">
             <div class="container">
-                <h1 class="display-4">{{info.name}} Email settings</h1>
+                <h1 class="display-4">{{info.name}} generic settings</h1>
                 <p class="lead">Generic settings support page</p>
                 <p>This is a simple support page for email automatic configuration service.
-                    It provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig
+                    It provides IMAP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig
                     capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
                 </p>
-                <p><a class="btn btn-primary btn-lg" href="https://github.com/Monogramm/autodiscover.xml"
+                <p><a class="btn btn-primary btn-lg" href="https://github.com/Monogramm/autodiscover-email-settings"
                         target="_blank" role="button">Learn more &raquo</a></p>
             </div>
         </div>
@@ -305,7 +305,7 @@
         <div class="container">
             <h3 id="mobileconfig" class="h3 font-weight-normal">Apple Configuration Profile</h3>
 
-            <div id="mobileconfig" class="mb-5">
+            <div class="mb-5">
                 <p>Enter your username or full email address and click the download button to setup your Apple mobile
                     device.</p>
 
@@ -328,7 +328,7 @@
         <div class="container">
             <h3 id="manualconfig" class="h3 font-weight-normal">Manual configuration</h3>
 
-            <div id="manualconfig" class="mb-5">
+            <div class="mb-5">
                 <p>Copy the following settings to your email application.</p>
 
                 <div class="row">
@@ -357,6 +357,33 @@
 
                             <dt>Encryption</dt>
                             <dd id="manualconfig-smtp-socket">{{smtp.socket}}</dd>
+                        </dl>
+                    </div>
+                </div>
+
+                <p>If your email application supports LDAP contacts, copy the following settings.</p>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 id="manualconfig-ldap">Contacts (LDAP)</h5>
+                        <dl>
+                            <dt>Hostname</dt>
+                            <dd id="manualconfig-ldap-hostname">{{ldap.host}}</dd>
+
+                            <dt>Port</dt>
+                            <dd id="manualconfig-ldap-port">{{ldap.port}}</dd>
+
+                            <dt>Encryption</dt>
+                            <dd id="manualconfig-ldap-socket">{{ldap.socket}}</dd>
+
+                            <dt>Base</dt>
+                            <dd id="manualconfig-ldap-base">{{ldap.base}}</dd>
+
+                            <dt>Username (replace <code>your.username</code> with your actual username)</dt>
+                            <dd id="manualconfig-ldap-username">{{ldap.userfield}}=<code>your.username</code>,{{ldap.usersbase}}</dd>
+
+                            <dt>Search Filter</dt>
+                            <dd id="manualconfig-ldap-searchfilter">{{ldap.searchfilter}}</dd>
                         </dl>
                     </div>
                 </div>

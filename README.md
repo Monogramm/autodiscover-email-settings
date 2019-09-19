@@ -6,7 +6,7 @@
 
 This service is created to autodiscover your provider email settings.
 
-It provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
+It provides IMAP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
 
 **A simple support page is also available at the root of the autodiscover domain.**
 
@@ -22,6 +22,7 @@ smtp                    IN      CNAME  {{$MX_DOMAIN}}.
 _imaps._tcp             IN      SRV    0 0 {{IMAP_PORT}} {{MX_DOMAIN}}.
 _submission._tcp        IN      SRV    0 0 {{SMTP_PORT}} {{MX_DOMAIN}}.
 _autodiscover._tcp      IN      SRV    0 0 443 autodiscover.{{$DOMAIN}}.
+_ldap._tcp              IN      SRV    0 0 {{LDAP_PORT}} {{LDAP_HOST}}.
 ```
 
 Replace above variables with data according to this table
@@ -31,8 +32,10 @@ Replace above variables with data according to this table
 | MX_DOMAIN       | The hostname name of your MX server |
 | DOMAIN          | Your apex/bare/naked Domain         |
 | AUTODISCOVER_IP | IP of the Autoconfig HTTP           |
-| IMAP_PORT       | Port for the IMAP server            |
-| SMTP_PORT       | Port for the SMTP server            |
+| IMAP_PORT       | Port for your IMAP server           |
+| SMTP_PORT       | Port for your SMTP server           |
+| LDAP_HOST       | The hostname of your LDAP server    |
+| LDAP_PORT       | Port for your LDAP server           |
 
 ---
 
@@ -59,9 +62,17 @@ services:
       - SMTP_HOST=smtp.domain.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
+      - LDAP_HOST=ldap.domain.com
+      - LDAP_PORT=636
+      - LDAP_SOCKET=SSL
+      - LDAP_BASE=dc=ldap,dc=example,dc=com
+      - LDAP_USER_FIELD=uid
+      - LDAP_USER_BASE=ou=People,dc=ldap,dc=example,dc=com
+      - LDAP_SEARCH=(|(objectClass=PostfixBookMailAccount))
       - PROFILE_IDENTIFIER=com.domain.autodiscover
-      - PROFILE_UUID=48C88203-4DB9-49E8-B593-4831903605A0
+      - PROFILE_UUID=92943D26-CAB3-4086-897D-DC6C0D8B1E86
       - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
+      - LDAP_UUID=6ECB6BA9-2208-4ABF-9E60-4E9F4CD7309E
     labels:
       - "traefik.port=8000"
       - "traefik.frontend.rule=Host:autoconfig.domain.com,autodiscover.domain.com"
@@ -85,9 +96,17 @@ services:
       - SMTP_HOST=smtp.domain.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
+      - LDAP_HOST=ldap.domain.com
+      - LDAP_PORT=636
+      - LDAP_SOCKET=SSL
+      - LDAP_BASE=dc=ldap,dc=example,dc=com
+      - LDAP_USER_FIELD=uid
+      - LDAP_USER_BASE=ou=People,dc=ldap,dc=example,dc=com
+      - LDAP_SEARCH=(|(objectClass=PostfixBookMailAccount))
       - PROFILE_IDENTIFIER=com.domain.autodiscover
-      - PROFILE_UUID=48C88203-4DB9-49E8-B593-4831903605A0
+      - PROFILE_UUID=92943D26-CAB3-4086-897D-DC6C0D8B1E86
       - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
+      - LDAP_UUID=6ECB6BA9-2208-4ABF-9E60-4E9F4CD7309E
     deploy:
       replicas: 1
       labels:
@@ -112,6 +131,7 @@ The above autoconfiguration methods assume the following:
 * Mozilla [Autoconfig configuration](https://developer.mozilla.org/en-US/docs/Mozilla/Thunderbird/Autoconfiguration/FileFormat/HowTo)
 * Microsoft [Exchange Command Reference](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-ascmd/1a3490f1-afe1-418a-aa92-6f630036d65a)
 * Apple [ConfigurationProfile reference](https://developer.apple.com/library/archive/featuredarticles/iPhoneConfigurationProfileRef/index.html)
+* [DNS SRV Records for LDAP](https://github.com/doctorjbeam/LDAPAutoDiscover)
 
 * [Bootstrap](https://getbootstrap.com/), [jQuery](https://jquery.com/) and [Popper.js](https://popper.js.org/) used for default support page
 

@@ -1,9 +1,9 @@
 {
 	"name": "autodiscover-email-settings",
-	"description": "Provides IMAP/SMTP Autoconfiguration capabilities for Microsoft Outlook, Apple Mail, and Thunderbird",
+	"description": "Provides IMAP/SMTP/LDAP Autoconfiguration capabilities for Microsoft Outlook, Apple Mail, and Thunderbird",
 	"website": "https://monogramm.io",
 	"repository": "https://github.com/monogramm/autodiscover-email-settings",
-	"keywords": ["monogramm", "autoconfigure", "autoconf", "autodiscover", "outlook", "thunderbird", "apple mail", "imap", "smtp"],
+	"keywords": ["monogramm", "autoconfigure", "autoconf", "autodiscover", "outlook", "thunderbird", "apple mail", "imap", "smtp", "ldap"],
 	"addons": [
 		"papertrail"
 	],
@@ -44,17 +44,45 @@
 			"description": "Your SMTP Socket",
 			"value": "STARTTLS"
 		},
+		"LDAP_HOST": {
+			"description": "Your LDAP Host",
+			"value": "ldap.example.com"
+		},
+		"LDAP_PORT": {
+			"description": "Your LDAP Port",
+			"value": "389"
+		},
+		"LDAP_SOCKET": {
+			"description": "Your LDAP Socket",
+			"value": "STARTTLS"
+		},
+		"LDAP_BASE": {
+			"description": "Your LDAP Base DN",
+			"value": "dc=ldap,dc=example,dc=com"
+		},
+		"LDAP_USER_FIELD": {
+			"description": "Your LDAP Username name",
+			"value": "uid"
+		},
+		"LDAP_USER_BASE": {
+			"description": "Your LDAP User Base DN",
+			"value": "ou=People,dc=ldap,dc=example,dc=com"
+		},
 		"PROFILE_IDENTIFIER": {
 			"description": "Your mobile profile identifier",
 			"value": "com.example.autodiscover"
 		},
 		"PROFILE_UUID": {
 			"description": "Your mobile profile globally unique ID",
-			"value": "48C88203-4DB9-49E8-B593-4831903605A0"
+			"value": "92943D26-CAB3-4086-897D-DC6C0D8B1E86"
 		},
 		"MAIL_UUID": {
 			"description": "Your mail profile globally unique ID",
 			"value": "7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC"
+		},
+		"LDAP_UUID": {
+			"description": "Your ldap profile globally unique ID",
+			"value": "6ECB6BA9-2208-4ABF-9E60-4E9F4CD7309E"
 		}
 	}
 }

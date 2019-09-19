@@ -58,11 +58,44 @@
 			<key>PayloadVersion</key>
 			<real>1</real>
 		</dict>
+		<dict>
+			<key>LDAPAccountDescription</key>
+			<string>{{info.name}} LDAP</string>
+			<key>LDAPAccountHostName</key>
+			<string>{{ldap.host}}</string>
+			<key>LDAPAccountUseSSL</key>
+			<{{ldapssl}}/>
+			<key>LDAPAccountUserName</key>
+			<string>{{ldap.userfield}}={{username}},{{ldap.usersbase}}</string>
+			<key>LDAPSearchSettings</key>
+			<array>
+				<dict>
+					<key>LDAPSearchSettingDescription</key>
+					<string>{{info.name}} Contacts</string>
+					<key>LDAPSearchSettingSearchBase</key>
+					<string>{{ldap.base}}</string>
+					<key>LDAPSearchSettingScope</key>
+					<string>LDAPSearchSettingScopeSubtree</string>
+				</dict>
+			</array>
+			<key>PayloadDescription</key>
+			<string>{{info.name}} LDAP</string>
+			<key>PayloadDisplayName</key>
+			<string>{{info.name}} Contacts</string>
+			<key>PayloadIdentifier</key>
+			<string>{{mobile.identifier}}.com.apple.ldap.account.{{mobile.ldap.uuid}}</string>
+			<key>PayloadType</key>
+			<string>com.apple.ldap.account</string>
+			<key>PayloadUUID</key>
+			<string>{{mobile.ldap.uuid}}</string>
+			<key>PayloadVersion</key>
+			<real>1</real>
+		</dict>
 	</array>
 	<key>PayloadDescription</key>
 	<string>{{info.name}}</string>
 	<key>PayloadDisplayName</key>
-	<string>{{email}}</string>
+	<string>{{info.name}}</string>
 	<key>PayloadIdentifier</key>
 	<string>{{mobile.identifier}}</string>
 	<key>PayloadOrganization</key>
@@ -74,6 +107,6 @@
 	<key>PayloadUUID</key>
 	<string>{{mobile.uuid}}</string>
 	<key>PayloadVersion</key>
-	<integer>1</integer>
+	<integer>2</integer>
 </dict>
 </plist>

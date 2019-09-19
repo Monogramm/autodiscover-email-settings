@@ -68,11 +68,13 @@ router.post('/autodiscover/autodiscover.xml', autodiscover);
 router.get('/Autodiscover/Autodiscover.xml', autodiscover);
 router.post('/Autodiscover/Autodiscover.xml', autodiscover);
 
+
 // Thunderbird
 router.get('/mail/config-v1.1.xml', function *autoconfig() {
 	this.set('Content-Type', 'application/xml');
 	yield this.render('autoconfig');
 });
+
 
 // iOS / Apple Mail (/email.mobileconfig?email=username@domain.com or /email.mobileconfig?email=username)
 router.get('/email.mobileconfig', function *autoconfig() {
@@ -99,6 +101,7 @@ router.get('/email.mobileconfig', function *autoconfig() {
 
 	const inssl		= settings.imap.socket == 'SSL' || settings.imap.socket == 'STARTTLS' ? 'true' : 'false';
 	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
+	const ldapssl	= settings.ldap.socket == 'SSL' || settings.ldap.port == '636' ? 'true' : 'false';
 
 	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
 	this.set('Content-Disposition', `attachment; filename="${filename}"`);
@@ -108,9 +111,11 @@ router.get('/email.mobileconfig', function *autoconfig() {
 		username,
 		domain,
 		inssl,
-		outssl
+		outssl,
+		ldapssl
 	});
 });
+
 
 // Generic support page
 router.get('/', function *index() {
