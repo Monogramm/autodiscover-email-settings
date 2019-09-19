@@ -1,5 +1,5 @@
 {
-  "name": "autodiscover.xml",
+  "name": "autodiscover-email-settings",
   "version": "1.0.0",
   "description": "Provides IMAP/SMTP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.",
   "main": "index.js",
@@ -12,16 +12,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tiliq/autodiscover.xml.git"
+    "url": "git+https://github.com/monogramm/autodiscover-email-settings.git"
   },
-  "author": "Kevin J. Martin",
+  "author": "Monogramm",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Tiliq/autodiscover.xml/issues"
+    "url": "https://github.com/monogramm/autodiscover-email-settings/issues"
   },
-  "homepage": "https://github.com/Tiliq/autodiscover.xml#readme",
+  "homepage": "https://github.com/monogramm/autodiscover-email-settings#readme",
   "keywords": [
-    "tiliq",
+    "monogramm",
     "autoconfigure",
     "autoconf",
     "autodiscover",
