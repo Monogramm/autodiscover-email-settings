@@ -18,8 +18,8 @@ imap                    IN      CNAME  {{$MX_DOMAIN}}.
 smtp                    IN      CNAME  {{$MX_DOMAIN}}.
 @                       IN      MX 10  {{$MX_DOMAIN}}.
 @                       IN      TXT    "mailconf=https://autoconfig.{{$DOMAIN}}/mail/config-v1.1.xml"
-_imaps._tcp             IN      SRV    0 0 993 {{MX_DOMAIN}}.
-_submission._tcp        IN      SRV    0 0 465 {{MX_DOMAIN}}.
+_imaps._tcp             IN      SRV    0 0 {{IMAP_PORT}} {{MX_DOMAIN}}.
+_submission._tcp        IN      SRV    0 0 {{SMTP_PORT}} {{MX_DOMAIN}}.
 _autodiscover._tcp      IN      SRV    0 0 443 autodiscover.{{$DOMAIN}}.
 ```
 
@@ -30,6 +30,8 @@ Replace above variables with data according to this table
 | MX_DOMAIN       | The hostname name of your MX server |
 | DOMAIN          | Your apex/bare/naked Domain         |
 | AUTODISCOVER_IP | IP of the Autoconfig HTTP           |
+| IMAP_PORT       | Port for the IMAP server            |
+| SMTP_PORT       | Port for the SMTP server            |
 
 ---
 
