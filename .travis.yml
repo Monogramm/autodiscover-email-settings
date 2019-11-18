@@ -1,0 +1,48 @@
+dist: trusty
+sudo: required
+
+services: docker
+
+language: bash
+
+branches:
+  only:
+    - master
+
+before_script:
+  - env | sort
+  - dir="."
+
+script:
+  - cd "$dir"
+  # Test container build
+  - travis_retry docker-compose build
+  - docker images
+  # Test container run
+  - travis_retry docker-compose up -d && sleep 20
+  - docker-compose ps
+  - docker-compose logs "autodiscover"
+  - docker-compose ps "autodiscover" | grep "Up" || exit 1
+  - echo 'Wait a bit' && sleep 60
+  - docker-compose ps
+  - docker-compose logs "autodiscover"
+  - docker-compose ps "autodiscover" | grep "Up"
+  # Test container restart
+  - docker-compose down
+  - travis_retry docker-compose up -d && sleep 20
+  - docker-compose ps
+  - docker-compose logs "autodiscover"
+  - docker-compose ps "autodiscover" | grep "Up"
+  - echo 'Wait a bit again' && sleep 60
+  - docker-compose logs "autodiscover"
+  - docker-compose ps "autodiscover" | grep "Exit 0"
+
+notifications:
+  email: false
+
+matrix:
+  allow_failures:
+    - env: VARIANT=debian
+
+env: # Environments
+  - VARIANT=alpine
