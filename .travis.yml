@@ -21,21 +21,21 @@ script:
   # Test container run
   - travis_retry docker-compose up -d && sleep 20
   - docker-compose ps
-  - docker-compose logs "autodiscover"
-  - docker-compose ps "autodiscover" | grep "Up" || exit 1
+  - docker-compose logs
+  - docker-compose ps | grep "Up" || exit 1
   - echo 'Wait a bit' && sleep 60
   - docker-compose ps
-  - docker-compose logs "autodiscover"
-  - docker-compose ps "autodiscover" | grep "Up"
+  - docker-compose logs
+  - docker-compose ps | grep "Up"
   # Test container restart
   - docker-compose down
   - travis_retry docker-compose up -d && sleep 20
   - docker-compose ps
-  - docker-compose logs "autodiscover"
-  - docker-compose ps "autodiscover" | grep "Up"
+  - docker-compose logs
+  - docker-compose ps | grep "Up"
   - echo 'Wait a bit again' && sleep 60
-  - docker-compose logs "autodiscover"
-  - docker-compose ps "autodiscover" | grep "Exit 0"
+  - docker-compose logs
+  - docker-compose ps | grep "Up"
 
 notifications:
   email: false
