@@ -10,7 +10,7 @@
 	"env": {
 		"COMPANY_NAME": {
 			"description": "Your company name",
-			"value": "Autodiscover"
+			"value": "AutoDiscover"
 		},
 		"SUPPORT_URL": {
 			"description": "Your company support URL",

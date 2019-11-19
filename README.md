@@ -1,5 +1,6 @@
 # autodiscover-email-settings
 
+[![Build Status](https://travis-ci.org/Monogramm/autodiscover-email-settings.svg)](https://travis-ci.org/Monogramm/autodiscover-email-settings)
 [![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/autodiscover-email-settings.svg)](https://hub.docker.com/r/monogramm/autodiscover-email-settings/)
 [![](https://images.microbadger.com/badges/version/monogramm/autodiscover-email-settings.svg)](https://microbadger.com/images/monogramm/autodiscover-email-settings)
 [![Docker layers](https://images.microbadger.com/badges/image/monogramm/autodiscover-email-settings.svg)](https://microbadger.com/images/monogramm/autodiscover-email-settings)
@@ -50,32 +51,33 @@ You can also achieve this with another proxy like [Nginx](https://www.nginx.com/
 version: '2'
 
 services:
-  autodiscover-domain-com:
+  autodiscover-example-com:
     image: monogramm/autodiscover-email-settings:latest
+    container_name: autodiscover
     environment:
       - COMPANY_NAME=Company
-      - SUPPORT_URL=https://autodiscover.domain.com
-      - DOMAIN=domain.com
-      - IMAP_HOST=imap.domain.com
+      - SUPPORT_URL=https://autodiscover.example.com
+      - DOMAIN=example.com
+      - IMAP_HOST=imap.example.com
       - IMAP_PORT=993
       - IMAP_SOCKET=SSL
-      - SMTP_HOST=smtp.domain.com
+      - SMTP_HOST=smtp.example.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
-      - LDAP_HOST=ldap.domain.com
+      - LDAP_HOST=ldap.example.com
       - LDAP_PORT=636
       - LDAP_SOCKET=SSL
       - LDAP_BASE=dc=ldap,dc=example,dc=com
       - LDAP_USER_FIELD=uid
       - LDAP_USER_BASE=ou=People,dc=ldap,dc=example,dc=com
       - LDAP_SEARCH=(|(objectClass=PostfixBookMailAccount))
-      - PROFILE_IDENTIFIER=com.domain.autodiscover
+      - PROFILE_IDENTIFIER=com.example.autodiscover
       - PROFILE_UUID=92943D26-CAB3-4086-897D-DC6C0D8B1E86
       - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
       - LDAP_UUID=6ECB6BA9-2208-4ABF-9E60-4E9F4CD7309E
     labels:
       - "traefik.port=8000"
-      - "traefik.frontend.rule=Host:autoconfig.domain.com,autodiscover.domain.com"
+      - "traefik.frontend.rule=Host:autoconfig.example.com,autodiscover.example.com"
 ```
 
 #### docker swarm
@@ -84,26 +86,27 @@ services:
 version: '3'
 
 services:
-  autodiscover-domain-com:
+  autodiscover-example-com:
     image: monogramm/autodiscover-email-settings:latest
+    container_name: autodiscover
     environment:
       - COMPANY_NAME=Company
-      - SUPPORT_URL=https://autodiscover.domain.com
-      - DOMAIN=domain.com
-      - IMAP_HOST=imap.domain.com
+      - SUPPORT_URL=https://autodiscover.example.com
+      - DOMAIN=example.com
+      - IMAP_HOST=imap.example.com
       - IMAP_PORT=993
       - IMAP_SOCKET=SSL
-      - SMTP_HOST=smtp.domain.com
+      - SMTP_HOST=smtp.example.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
-      - LDAP_HOST=ldap.domain.com
+      - LDAP_HOST=ldap.example.com
       - LDAP_PORT=636
       - LDAP_SOCKET=SSL
       - LDAP_BASE=dc=ldap,dc=example,dc=com
       - LDAP_USER_FIELD=uid
       - LDAP_USER_BASE=ou=People,dc=ldap,dc=example,dc=com
       - LDAP_SEARCH=(|(objectClass=PostfixBookMailAccount))
-      - PROFILE_IDENTIFIER=com.domain.autodiscover
+      - PROFILE_IDENTIFIER=com.example.autodiscover
       - PROFILE_UUID=92943D26-CAB3-4086-897D-DC6C0D8B1E86
       - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
       - LDAP_UUID=6ECB6BA9-2208-4ABF-9E60-4E9F4CD7309E
@@ -111,14 +114,14 @@ services:
       replicas: 1
       labels:
         - "traefik.port=8000"
-        - "traefik.frontend.rule=Host:autoconfig.domain.com,autodiscover.domain.com"
+        - "traefik.frontend.rule=Host:autoconfig.example.com,autodiscover.example.com"
 ```
 
 ### Credits
 
 Inspired from https://github.com/sylvaindumont/autodiscover.xml, but without the few restrictions mentioned in the original project notes and with a simple support page to allow manual setup and iOS profile download.
 
-The original project was inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but with https://github.com/monogramm/autodiscover-email-settings instead of https://github.com/gronke/email-autodiscover to allow a much lighter ([![](https://images.microbadger.com/badges/image/weboaks/autodiscover-email-settings.svg)](https://microbadger.com/images/weboaks/autodiscover-email-settings)) image based of node on alpine instead of apache on debian ([![](https://images.microbadger.com/badges/image/jsmitsnl/docker-email-autodiscover.svg)](https://microbadger.com/images/jsmitsnl/docker-email-autodiscover))
+The original project was inspired from https://github.com/johansmitsnl/docker-email-autodiscover, but with https://github.com/Tiliq/autodiscover.xml instead of https://github.com/gronke/email-autodiscover to allow a much lighter ([![](https://images.microbadger.com/badges/image/weboaks/autodiscover-email-settings.svg)](https://microbadger.com/images/weboaks/autodiscover-email-settings)) image based of node on alpine instead of apache on debian ([![](https://images.microbadger.com/badges/image/jsmitsnl/docker-email-autodiscover.svg)](https://microbadger.com/images/jsmitsnl/docker-email-autodiscover))
 
 ### Notes
 

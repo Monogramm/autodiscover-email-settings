@@ -103,7 +103,7 @@ router.get('/email.mobileconfig', function *autoconfig() {
 	const outssl	= settings.smtp.socket == 'SSL' || settings.smtp.socket == 'STARTTLS' ? 'true' : 'false';
 	const ldapssl	= settings.ldap.socket == 'SSL' || settings.ldap.port == '636' ? 'true' : 'false';
 
-	this.set('Content-Type', 'application/x-apple-aspen-config; chatset=utf-8');
+	this.set('Content-Type', 'application/x-apple-aspen-config; charset=utf-8');
 	this.set('Content-Disposition', `attachment; filename="${filename}"`);
 
 	yield this.render('mobileconfig', {
