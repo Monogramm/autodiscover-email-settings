@@ -126,10 +126,6 @@ router.get("/favicon.ico", function *icon() {
 	yield this.render("favicon.ico");
 });
 
-router.get("/documents.svg", function *icon() {
-	yield this.render("documents.svg");
-});
-
 app.context.render = swig({
 	root: path.join(__dirname, "views"),
 	autoescape: true,

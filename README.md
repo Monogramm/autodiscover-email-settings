@@ -1,4 +1,4 @@
-# autodiscover-email-settings
+# ![Autodiscover](icon.svg) Autodiscover Email Settings
 
 [![Build Status](https://travis-ci.org/Monogramm/autodiscover-email-settings.svg)](https://travis-ci.org/Monogramm/autodiscover-email-settings)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f471992f0aa348b791c9ed17ccea344d)](https://www.codacy.com/gh/Monogramm/autodiscover-email-settings?utm_source=github.com&utm_medium=referral&utm_content=Monogramm/autodiscover-email-settings&utm_campaign=Badge_Grade)
