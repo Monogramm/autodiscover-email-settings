@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const path		= require("path");
 const app		= require("koa")();
@@ -120,6 +120,14 @@ router.get("/email.mobileconfig", function *autoconfig() {
 // Generic support page
 router.get("/", function *index() {
 	yield this.render("index.html");
+});
+
+router.get("/favicon.ico", function *icon() {
+	yield this.render("favicon.ico");
+});
+
+router.get("/documents.svg", function *icon() {
+	yield this.render("documents.svg");
 });
 
 app.context.render = swig({
