@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const path		= require("path");
 const app		= require("koa")();
@@ -40,7 +40,7 @@ function *autodiscover() {
 		email		= "";
 		username	= "";
 		domain		= settings.domain;
-	} else if ( ~email.indexOf("@") ) {
+	} else if ( ~email.content.indexOf("@") ) {
 		email		= email.content;
 		username	= email.split("@")[0];
 		domain		= email.split("@")[1];
@@ -88,7 +88,7 @@ router.get("/email.mobileconfig", function *autoconfig() {
 
 	let username;
 	let domain;
-	if (~email.indexOf("@") ) {
+	if ( ~email.indexOf("@") ) {
 		username	= email.split("@")[0];
 		domain		= email.split("@")[1];
 	} else {
@@ -120,6 +120,10 @@ router.get("/email.mobileconfig", function *autoconfig() {
 // Generic support page
 router.get("/", function *index() {
 	yield this.render("index.html");
+});
+
+router.get("/favicon.ico", function *icon() {
+	yield this.render("favicon.ico");
 });
 
 app.context.render = swig({
