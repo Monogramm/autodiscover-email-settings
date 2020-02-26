@@ -40,7 +40,7 @@ function *autodiscover() {
 		email		= "";
 		username	= "";
 		domain		= settings.domain;
-	} else if ( ~email.indexOf("@") ) {
+	} else if ( ~email.content.indexOf("@") ) {
 		email		= email.content;
 		username	= email.split("@")[0];
 		domain		= email.split("@")[1];
@@ -88,7 +88,7 @@ router.get("/email.mobileconfig", function *autoconfig() {
 
 	let username;
 	let domain;
-	if (~email.indexOf("@") ) {
+	if ( ~email.indexOf("@") ) {
 		username	= email.split("@")[0];
 		domain		= email.split("@")[1];
 	} else {
