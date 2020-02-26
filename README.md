@@ -1,6 +1,7 @@
 # autodiscover-email-settings
 
 [![Build Status](https://travis-ci.org/Monogramm/autodiscover-email-settings.svg)](https://travis-ci.org/Monogramm/autodiscover-email-settings)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f471992f0aa348b791c9ed17ccea344d)](https://www.codacy.com/gh/Monogramm/autodiscover-email-settings?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Monogramm/autodiscover-email-settings&amp;utm_campaign=Badge_Grade)
 [![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/autodiscover-email-settings.svg)](https://hub.docker.com/r/monogramm/autodiscover-email-settings/)
 [![](https://images.microbadger.com/badges/version/monogramm/autodiscover-email-settings.svg)](https://microbadger.com/images/monogramm/autodiscover-email-settings)
 [![Docker layers](https://images.microbadger.com/badges/image/monogramm/autodiscover-email-settings.svg)](https://microbadger.com/images/monogramm/autodiscover-email-settings)
