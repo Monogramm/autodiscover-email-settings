@@ -1,23 +1,31 @@
+os: linux
 dist: trusty
-sudo: required
 
 services: docker
 
-language: bash
+language: shell
 
 branches:
   only:
     - master
 
-before_script:
+before_install:
   - env | sort
-  - dir="."
+  - export home=$(pwd)
+  - export travis_dir="${home}"
 
-script:
-  - cd "$dir"
+install:
+  - echo "Changing to travis test directory ($travis_dir)"
+  - cd "$travis_dir"
   # Test container build
   - travis_retry docker-compose build
+
+before_script:
   - docker images
+
+script:
+  - echo "Changing to travis test directory ($travis_dir)"
+  - cd "$travis_dir"
   # Test container run
   - travis_retry docker-compose up -d && sleep 20
   - docker-compose ps
