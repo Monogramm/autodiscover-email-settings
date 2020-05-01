@@ -6,23 +6,24 @@
 	<false/>
 	<key>PayloadContent</key>
 	<array>
+{% if imap.host || pop.host %}
 		<dict>
 			<key>EmailAccountDescription</key>
 			<string>{{email}}</string>
 			<key>EmailAccountName</key>
 			<string>{{email}}</string>
 			<key>EmailAccountType</key>
-			<string>EmailTypeIMAP</string>
+			<string>{% if imap.host %}EmailTypeIMAP{% else %}EmailTypePOP{% endif %}</string>
 			<key>EmailAddress</key>
 			<string>{{email}}</string>
 			<key>IncomingMailServerAuthentication</key>
 			<string>EmailAuthPassword</string>
 			<key>IncomingMailServerHostName</key>
-			<string>{{imap.host}}</string>
+			<string>{% if imap.host %}{{imap.host}}{% else %}{{pop.host}}{% endif %}</string>
 			<key>IncomingMailServerPortNumber</key>
-			<integer>{{imap.port}}</integer>
+			<integer>{% if imap.host %}{{imap.port}}{% else %}{{pop.port}}{% endif %}</integer>
 			<key>IncomingMailServerUseSSL</key>
-			<{{inssl}}/>
+			<{%- if imap.host %}{{imapssl}}{% else %}{{popssl}}{% endif -%}/>
 			<key>IncomingMailServerUsername</key>
 			<string>{{email}}</string>
 			<key>OutgoingPasswordSameAsIncomingPassword</key>
@@ -34,7 +35,7 @@
 			<key>OutgoingMailServerPortNumber</key>
 			<integer>{{smtp.port}}</integer>
 			<key>OutgoingMailServerUseSSL</key>
-			<{{outssl}}/>
+			<{{smtpssl}}/>
 			<key>OutgoingMailServerUsername</key>
 			<string>{{email}}</string>
 			<key>SMIMEEnabled</key>
@@ -58,6 +59,8 @@
 			<key>PayloadVersion</key>
 			<real>1</real>
 		</dict>
+{% endif %}
+{% if ldap.host %}
 		<dict>
 			<key>LDAPAccountDescription</key>
 			<string>{{info.name}} LDAP</string>
@@ -91,6 +94,7 @@
 			<key>PayloadVersion</key>
 			<real>1</real>
 		</dict>
+{% endif %}
 	</array>
 	<key>PayloadDescription</key>
 	<string>{{info.name}}</string>
