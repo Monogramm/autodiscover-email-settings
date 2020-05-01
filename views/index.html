@@ -247,9 +247,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#automatic">Automatic</a>
                 </li>
-                <li class="nav-item">
+                {% if mobile.identifier %}<li class="nav-item">
                     <a class="nav-link" href="#mobileconfig">iOS</a>
-                </li>
+                </li>{% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="#manualconfig">Manual configuration</a>
                 </li>
@@ -275,7 +275,7 @@
                 <h1 class="display-4">{{info.name}} generic settings</h1>
                 <p class="lead">Generic settings support page</p>
                 <p>This is a simple support page for email automatic configuration service.
-                    It provides IMAP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig
+                    It provides IMAP/POP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig
                     capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
                 </p>
                 <p><a class="btn btn-primary btn-lg" href="https://github.com/Monogramm/autodiscover-email-settings"
@@ -293,10 +293,10 @@
                     <em>Mozilla Thunderbird</em>, ...) <strong>should automatically be configured</strong> with the
                     recommended settings for this email server just after entering your email address <code>@{{domain}}</code>.</p>
 
-                <p>If you encounter some issues, depending on your situation, you can either:</p>
+                <p>If you encounter some issues, depending on your situation, you can:</p>
                 <ul>
-                    <li>easily configure your Apple Mobile devices (<em>iPhone / iPad</em>) with
-                        <a href="#mobileconfig">this simple form</a></li>
+                    {% if mobile.identifier %}<li>easily configure your Apple Mobile devices (<em>iPhone / iPad</em>) with
+                        <a href="#mobileconfig">this simple form</a></li>{% endif %}
                     <li>setup your email application with the <a href="#manualconfig">manual configuration</a></li>
                 </ul>
             </div>
@@ -305,6 +305,7 @@
 
         </div> <!-- /container -->
 
+        {%- if mobile.identifier %}
         <div class="container">
             <h3 id="mobileconfig" class="h3 font-weight-normal">Apple Configuration Profile</h3>
 
@@ -327,6 +328,7 @@
             <hr>
 
         </div> <!-- /container -->
+        {% endif -%}
 
         <div class="container">
             <h3 id="manualconfig" class="h3 font-weight-normal">Manual configuration</h3>
@@ -335,6 +337,7 @@
                 <p>Copy the following settings to your email application.</p>
 
                 <div class="row">
+                    {%- if imap.host %}
                     <div class="col-md-6">
                         <h5 id="manualconfig-imap">Incoming server (IMAP)</h5>
                         <dl>
@@ -357,7 +360,36 @@
                             <dd id="manualconfig-imap-socket">{{imap.socket}}</dd>
                         </dl>
                     </div>
+                    {% endif -%}
 
+                    {%- if pop.host %}
+                    <div class="col-md-6">
+                        <h5 id="manualconfig-pop">Incoming server (POP)</h5>
+                        <dl>
+                            <dt>Hostname <button type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                title="Copy POP hostname"
+                                onclick="copy('manualconfig-pop-hostname')">Copy</button></dt>
+                            <dd id="manualconfig-pop-hostname">{{pop.host}}</dd>
+
+                            <dt>Port <button type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                title="Copy POP hostname"
+                                onclick="copy('manualconfig-pop-port')">Copy</button></dt>
+                            <dd id="manualconfig-pop-port">{{pop.port}}</dd>
+
+                            <dt>Encryption <button type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                title="Copy POP hostname"
+                                onclick="copy('manualconfig-pop-socket')">Copy</button></dt>
+                            <dd id="manualconfig-pop-socket">{{pop.socket}}</dd>
+                        </dl>
+                    </div>
+                    {% endif -%}
+                </div>
+
+                <div class="row">
+                    {%- if smtp.host %}
                     <div class="col-md-6">
                         <h5 id="manualconfig-smtp">Outgoing server (SMTP)</h5>
                         <dl>
@@ -380,8 +412,10 @@
                             <dd id="manualconfig-smtp-socket">{{smtp.socket}}</dd>
                         </dl>
                     </div>
+                    {% endif -%}
                 </div>
 
+                {%- if ldap.host %}
                 <p>If your email application supports LDAP contacts, copy the following settings.</p>
 
                 <div class="row">
@@ -426,6 +460,7 @@
                         </dl>
                     </div>
                 </div>
+                {% endif -%}
             </div>
 
             <hr>

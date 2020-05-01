@@ -6,6 +6,7 @@
 	    <displayName>{{info.name}} Email</displayName>
 	    <displayShortName>%EMAILLOCALPART%</displayShortName>
 
+		{%- if imap.host %}
 	    <incomingServer type="imap">
 			<hostname>{{imap.host}}</hostname>
 			<port>{{imap.port}}</port>
@@ -13,7 +14,19 @@
 			<authentication>password-cleartext</authentication>
 			<username>%EMAILADDRESS%</username>
 		</incomingServer>
+		{% endif -%}
 
+		{%- if pop.host %}
+	    <incomingServer type="pop3">
+			<hostname>{{pop.host}}</hostname>
+			<port>{{pop.port}}</port>
+			<socketType>{{pop.socket}}</socketType>
+			<authentication>password-cleartext</authentication>
+			<username>%EMAILADDRESS%</username>
+		</incomingServer>
+		{% endif -%}
+
+		{%- if smtp.host %}
 	    <outgoingServer type="smtp">
 			<hostname>{{smtp.host}}</hostname>
 			<port>{{smtp.port}}</port>
@@ -21,6 +34,7 @@
 			<authentication>password-cleartext</authentication>
 			<username>%EMAILADDRESS%</username>
 	    </outgoingServer>
+		{% endif -%}
 
 		<documentation url="{{info.url}}">
 			<descr lang="en">Generic settings page</descr>

@@ -9,6 +9,11 @@ module.exports = {
 		port: process.env.IMAP_PORT,
 		socket: process.env.IMAP_SOCKET
 	},
+	pop: {
+		host: process.env.POP_HOST,
+		port: process.env.POP_PORT,
+		socket: process.env.POP_SOCKET
+	},
 	smtp: {
 		host: process.env.SMTP_HOST,
 		port: process.env.SMTP_PORT,

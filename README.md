@@ -8,7 +8,7 @@
 
 This service is created to autodiscover your provider email settings.
 
-It provides IMAP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
+It provides IMAP/POP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Apple Mail, Autoconfig capabilities for Thunderbird, and Configuration Profiles for iOS/Apple Mail.
 
 **A simple support page is also available at the root of the autodiscover domain.**
 
@@ -21,6 +21,7 @@ It provides IMAP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Apple 
     @                       IN      MX 10  {{$MX_DOMAIN}}.
     @                       IN      TXT    "mailconf=https://autoconfig.{{$DOMAIN}}/mail/config-v1.1.xml"
     _imaps._tcp             IN      SRV    0 0 {{IMAP_PORT}} {{MX_DOMAIN}}.
+    _pop3s._tcp             IN      SRV    0 0 {{POP_PORT}} {{MX_DOMAIN}}.
     _submission._tcp        IN      SRV    0 0 {{SMTP_PORT}} {{MX_DOMAIN}}.
     _autodiscover._tcp      IN      SRV    0 0 443 autodiscover.{{$DOMAIN}}.
     _ldap._tcp              IN      SRV    0 0 {{LDAP_PORT}} {{LDAP_HOST}}.
@@ -33,6 +34,7 @@ Replace above variables with data according to this table
 | DOMAIN          | Your apex/bare/naked Domain         |
 | AUTODISCOVER_IP | IP of the Autoconfig HTTP           |
 | IMAP_PORT       | Port for your IMAP server           |
+| POP_PORT        | Port for your POP server            |
 | SMTP_PORT       | Port for your SMTP server           |
 | LDAP_HOST       | The hostname of your LDAP server    |
 | LDAP_PORT       | Port for your LDAP server           |
@@ -57,12 +59,19 @@ services:
       - COMPANY_NAME=Company
       - SUPPORT_URL=https://autodiscover.example.com
       - DOMAIN=example.com
+      # IMAP configuration (host mandatory to enable)
       - IMAP_HOST=imap.example.com
       - IMAP_PORT=993
       - IMAP_SOCKET=SSL
+      # POP configuration (host mandatory to enable)
+      - POP_HOST=pop3.example.com
+      - POP_PORT=995
+      - POP_SOCKET=SSL
+      # SMTP configuration (host mandatory to enable)
       - SMTP_HOST=smtp.example.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
+      # LDAP configuration (host mandatory to enable)
       - LDAP_HOST=ldap.example.com
       - LDAP_PORT=636
       - LDAP_SOCKET=SSL
@@ -70,6 +79,7 @@ services:
       - LDAP_USER_FIELD=uid
       - LDAP_USER_BASE=ou=People,dc=ldap,dc=example,dc=com
       - LDAP_SEARCH=(|(objectClass=PostfixBookMailAccount))
+      # Apple mobile config identifiers (identifier mandatory to enable)
       - PROFILE_IDENTIFIER=com.example.autodiscover
       - PROFILE_UUID=92943D26-CAB3-4086-897D-DC6C0D8B1E86
       - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
@@ -92,12 +102,19 @@ services:
       - COMPANY_NAME=Company
       - SUPPORT_URL=https://autodiscover.example.com
       - DOMAIN=example.com
+      # IMAP configuration (host mandatory to enable)
       - IMAP_HOST=imap.example.com
       - IMAP_PORT=993
       - IMAP_SOCKET=SSL
+      # POP configuration (host mandatory to enable)
+      - POP_HOST=pop3.example.com
+      - POP_PORT=995
+      - POP_SOCKET=SSL
+      # SMTP configuration (host mandatory to enable)
       - SMTP_HOST=smtp.example.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
+      # LDAP configuration (host mandatory to enable)
       - LDAP_HOST=ldap.example.com
       - LDAP_PORT=636
       - LDAP_SOCKET=SSL
@@ -105,6 +122,7 @@ services:
       - LDAP_USER_FIELD=uid
       - LDAP_USER_BASE=ou=People,dc=ldap,dc=example,dc=com
       - LDAP_SEARCH=(|(objectClass=PostfixBookMailAccount))
+      # Apple mobile config identifiers (identifier mandatory to enable)
       - PROFILE_IDENTIFIER=com.example.autodiscover
       - PROFILE_UUID=92943D26-CAB3-4086-897D-DC6C0D8B1E86
       - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
