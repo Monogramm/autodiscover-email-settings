@@ -14,6 +14,8 @@ It provides IMAP/POP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Ap
 
 ![General settings](docs/screenshot_01.png)
 
+![General settings](docs/screenshot_02.png)
+
 ## DNS settings
 
     autoconfig              IN      A      {{$AUTODISCOVER_IP}}
