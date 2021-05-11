@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# See documentation for details:
+# https://docs.docker.com/docker-hub/builds/advanced/
+
+if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_REGISTRY}" ]; then
+    docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" "${DOCKER_REGISTRY}"
+fi

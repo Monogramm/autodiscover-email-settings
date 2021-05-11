@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# See documentation for details:
+# https://docs.docker.com/docker-hub/builds/advanced/
+
+if [ "${DOCKERFILE_PATH}" = "Dockerfile.develop" ] || [ "${DOCKERFILE_PATH}" = "Dockerfile.gitpod" ]; then
+    echo "No tests (yet) for ${DOCKERFILE_PATH} images."
+    exit 0
+fi
+
+for file in docker-compose*.test.yml; do
+
+    echo "Starting Test in ${file}..."
+
+    # Build test container
+    docker-compose --no-ansi -f "${file}" build sut
+    # Test container run
+    docker-compose --no-ansi -f "${file}" up -d && sleep 60
+    docker-compose --no-ansi -f "${file}" logs -f "sut"
+    docker-compose --no-ansi -f "${file}" ps
+    docker-compose --no-ansi -f "${file}" logs --no-color "autodiscover"
+    docker-compose --no-ansi -f "${file}" ps "sut" | grep "Exit 0" || exit 1
+    docker-compose --no-ansi -f "${file}" down
+
+    # Test container restart
+    docker-compose --no-ansi -f "${file}" up -d && sleep 60
+    docker-compose --no-ansi -f "${file}" logs -f "sut"
+    docker-compose --no-ansi -f "${file}" ps
+    docker-compose --no-ansi -f "${file}" logs --no-color "autodiscover"
+    docker-compose --no-ansi -f "${file}" ps "sut" | grep "Exit 0" || exit 1
+    docker-compose --no-ansi -f "${file}" down -v
+
+done

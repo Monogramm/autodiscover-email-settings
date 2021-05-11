@@ -1,5 +1,5 @@
 os: linux
-dist: trusty
+dist: bionic
 
 services: docker
 
@@ -7,43 +7,24 @@ language: shell
 
 branches:
   only:
+    - main
     - master
+    - develop
 
 before_install:
   - env | sort
-  - export home=$(pwd)
-  - export travis_dir="${home}"
 
 install:
-  - echo "Changing to travis test directory ($travis_dir)"
-  - cd "$travis_dir"
-  # Test container build
-  - travis_retry docker-compose build
+  # Execute CI build hooks
+  - ./hooks/run build
 
 before_script:
+  # Display docker images
   - docker images
 
 script:
-  - echo "Changing to travis test directory ($travis_dir)"
-  - cd "$travis_dir"
-  # Test container run
-  - travis_retry docker-compose up -d && sleep 20
-  - docker-compose ps
-  - docker-compose logs
-  - docker-compose ps | grep "Up" || exit 1
-  - echo 'Wait a bit' && sleep 60
-  - docker-compose ps
-  - docker-compose logs
-  - docker-compose ps | grep "Up"
-  # Test container restart
-  - docker-compose down
-  - travis_retry docker-compose up -d && sleep 20
-  - docker-compose ps
-  - docker-compose logs
-  - docker-compose ps | grep "Up"
-  - echo 'Wait a bit again' && sleep 60
-  - docker-compose logs
-  - docker-compose ps | grep "Up"
+  # Execute CI test hooks
+  - ./hooks/run test
 
 notifications:
   email: false

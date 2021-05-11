@@ -1,0 +1,64 @@
+version: '2.3'
+
+services:
+  autodiscover:
+    # For production, download prebuilt image
+    #image: monogramm/autodiscover-email-settings:latest
+    # For development or CI, build from local Dockerfile
+    build:
+      context: ./
+      dockerfile: ${DOCKERFILE_PATH}
+      args:
+        - VERSION=${DOCKER_TAG}
+        - VCS_REF=${SOURCE_COMMIT}
+        - BUILD_DATE=${BUILD_DATE}
+    image: ${IMAGE_NAME}
+    container_name: autodiscover
+    environment:
+      - COMPANY_NAME=Company
+      - SUPPORT_URL=https://autodiscover.example.com
+      - DOMAIN=example.com
+      - IMAP_HOST=imap.example.com
+      - IMAP_PORT=993
+      - IMAP_SOCKET=SSL
+      - SMTP_HOST=smtp.example.com
+      - SMTP_PORT=587
+      - SMTP_SOCKET=STARTTLS
+      - LDAP_HOST=ldap.example.com
+      - LDAP_PORT=636
+      - LDAP_SOCKET=SSL
+      - LDAP_BASE=dc=ldap,dc=example,dc=com
+      - LDAP_USER_FIELD=uid
+      - LDAP_USER_BASE=ou=People,dc=ldap,dc=example,dc=com
+      - LDAP_SEARCH=(|(objectClass=PostfixBookMailAccount))
+      - PROFILE_IDENTIFIER=com.example.autodiscover
+      - PROFILE_UUID=92943D26-CAB3-4086-897D-DC6C0D8B1E86
+      - MAIL_UUID=7A981A9E-D5D0-4EF8-87FE-39FD6A506FAC
+      - LDAP_UUID=6ECB6BA9-2208-4ABF-9E60-4E9F4CD7309E
+    labels:
+      - "traefik.port=8000"
+      - "traefik.frontend.rule=Host:autoconfig.example.com,autodiscover.example.com"
+
+  # Test services (do not use in production)
+
+  # https://docs.docker.com/docker-hub/builds/automated-testing/
+  sut:
+    build:
+      context: ./docker/test
+      dockerfile: Dockerfile
+    command: sh /docker_test.sh
+    depends_on:
+      autodiscover:
+        condition: service_started
+    environment:
+      - DOCKER_TEST_CONTAINER=autodiscover
+      - DOCKER_WEB_CONTAINER=autodiscover
+      - DOCKER_WEB_PORT=8000
+      - DOCKER_WEB_HEALTH_API=
+      - DOCKER_WEB_HEALTH_RESULT=Generic settings
+    volumes_from:
+      - autodiscover
+    # If you want, you can sync time & timezone with host
+    #volumes:
+    #  - /etc/localtime:/etc/localtime:ro
+    #  - /etc/timezone:/etc/timezone:ro
