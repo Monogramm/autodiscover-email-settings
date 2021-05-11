@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# See documentation for details:
+# https://docs.docker.com/docker-hub/builds/advanced/
+
+if [ ! -f '.env' ] &&  [ -f '.env_template' ]; then
+    echo 'Init docker compose environment variables...'
+    cp .env_template .env.tmp
+
+    mv .env.tmp .env
+fi
+
+#echo 'Preparing persisted data...'
+#mkdir -p "${APP_HOME:-.docker/app}"
+#chown 777 "${APP_HOME:-.docker/app}"

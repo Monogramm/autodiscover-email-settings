@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# See documentation for details:
+# https://docs.docker.com/docker-hub/builds/advanced/
+
+if [ -n "${DOCKER_REGISTRY}" ]; then
+    export DOCKER_BASE_IMAGE=${DOCKER_REGISTRY}/${DOCKER_REPO}
+else
+    export DOCKER_BASE_IMAGE=${DOCKER_REPO}
+fi
+
+if [ -f ./.dockertags ]; then
+    for tag in $(cat ./.dockertags); do
+        if [ ! "${tag}" = "${DOCKER_TAG}" ]; then
+            docker tag "$IMAGE_NAME" "$DOCKER_BASE_IMAGE:$tag"
+            docker push "$DOCKER_BASE_IMAGE:$tag"
+        fi
+    done
+fi
+
+# Push image with tag set to commit hash
+docker tag "$IMAGE_NAME" "$DOCKER_BASE_IMAGE:$SOURCE_COMMIT"
+docker push "$DOCKER_BASE_IMAGE:$SOURCE_COMMIT"
+
+if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_REGISTRY}" ]; then
+    echo "Logout of Docker Registry ${DOCKER_REGISTRY}..."
+    docker logout "${DOCKER_REGISTRY}"
+fi

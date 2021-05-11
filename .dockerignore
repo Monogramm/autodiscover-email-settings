@@ -1,3 +1,34 @@
-.editorconfig
+# Ignore SCM
 .git*
+
+# IDEs and other editors
+.editorconfig
+*.swp
+.vscode
+.idea/
+*.iml
+node_modules
+.kdev4/
+*.kdev4
+*debug.log
+
+# build output
 .js*
+
+# Docker files
+docker-compose*.yml
+
+# DockerHub
+hooks/
+
+# GitHub
+.github/
+
+# Travis-CI
+.travis.yml
+
+# Jenkins
+Jenkisfile
+
+# Custom files
+.docker/

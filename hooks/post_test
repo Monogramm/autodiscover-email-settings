@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# See documentation for details:
+# https://docs.docker.com/docker-hub/builds/advanced/
+
+#echo 'Removing persisted data...'
+#rm -rf "${APP_HOME:-.docker/app}"
