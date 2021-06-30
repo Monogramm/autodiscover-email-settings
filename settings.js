@@ -19,6 +19,10 @@ module.exports = {
 		port: process.env.SMTP_PORT,
 		socket: process.env.SMTP_SOCKET
 	},
+	mobilesync: {
+		url: process.env.MOBILESYNC_URL,
+		name: process.env.MOBILESYNC_NAME
+	},
 	ldap: {
 		host: process.env.LDAP_HOST,
 		port: process.env.LDAP_PORT,

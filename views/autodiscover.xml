@@ -79,5 +79,19 @@
 			</Protocol>
 		</Account>
 		{% endif -%}
+
+		{%- if mobilesync.url %}
+		<Action>
+			<Settings>
+				<Server>
+					<Type>MobileSync</Type>
+					<Url>{{mobilesync.url}}</Url>
+					{%- if mobilesync.name %}
+					<Name>{{mobilesync.name}}</Name>
+					{% endif -%}
+				</Server>
+			</Settings>
+		</Action>
+		{% endif -%}
 	</Response>
 </Autodiscover>

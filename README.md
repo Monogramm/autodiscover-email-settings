@@ -75,6 +75,9 @@ services:
       - SMTP_HOST=smtp.example.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
+      # MobileSync/ActiveSync configuration (url mandatory to enable)
+      - MOBILESYNC_URL=https://sync.example.com
+      - MOBILESYNC_NAME=sync.example.com
       # LDAP configuration (host mandatory to enable)
       - LDAP_HOST=ldap.example.com
       - LDAP_PORT=636
@@ -118,6 +121,9 @@ services:
       - SMTP_HOST=smtp.example.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
+      # MobileSync/ActiveSync configuration (url mandatory to enable)
+      - MOBILESYNC_URL=https://sync.example.com
+      - MOBILESYNC_NAME=sync.example.com
       # LDAP configuration (host mandatory to enable)
       - LDAP_HOST=ldap.example.com
       - LDAP_PORT=636

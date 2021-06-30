@@ -24,6 +24,8 @@ services:
       - SMTP_HOST=smtp.example.com
       - SMTP_PORT=587
       - SMTP_SOCKET=STARTTLS
+      - MOBILESYNC_URL=https://sync.example.com
+      - MOBILESYNC_NAME=sync.example.com
       - LDAP_HOST=ldap.example.com
       - LDAP_PORT=636
       - LDAP_SOCKET=SSL

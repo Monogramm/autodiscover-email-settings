@@ -44,6 +44,14 @@
 			"description": "Your SMTP Socket",
 			"value": "STARTTLS"
 		},
+		"MOBILESYNC_URL": {
+			"description": "MobileSync URL",
+			"value": "https://sync.example.com"
+		},
+		"MOBILESYNC_NAME": {
+			"description": "MobileSync Name",
+			"value": "https://sync.example.com"
+		},
 		"LDAP_HOST": {
 			"description": "Your LDAP Host",
 			"value": "ldap.example.com"

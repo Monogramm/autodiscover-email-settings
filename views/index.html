@@ -415,6 +415,21 @@
                     {% endif -%}
                 </div>
 
+                {%- if mobilesync.url %}
+                <p>If you want to connect using ActiveSync on your mobile, you can connect to the following host.</p>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 id="manualconfig-mobilesync">ActiveSync (Mobile)</h5>
+                        <dl>
+                            <dt>URL <button type="button"
+                                class="btn btn-outline-secondary btn-sm"
+                                title="Copy ActiveSync URL"
+                                onclick="copy('manualconfig-mobilesync-url')">Copy</button></dt>
+                            <dd id="manualconfig-mobilesync-url">{{mobilesync.url}}</dd>
+                        </dl>
+                    </div>
+                </div>
+                {% endif -%}
                 {%- if ldap.host %}
                 <p>If your email application supports LDAP contacts, copy the following settings.</p>
 
