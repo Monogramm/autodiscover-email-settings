@@ -50,7 +50,7 @@
 		},
 		"MOBILESYNC_NAME": {
 			"description": "MobileSync Name",
-			"value": "https://sync.example.com"
+			"value": "sync.example.com"
 		},
 		"LDAP_HOST": {
 			"description": "Your LDAP Host",
