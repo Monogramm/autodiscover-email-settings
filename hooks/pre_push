@@ -3,6 +3,12 @@
 # See documentation for details:
 # https://docs.docker.com/docker-hub/builds/advanced/
 
-if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_REGISTRY}" ]; then
-    docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" "${DOCKER_REGISTRY}"
+if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_LOGIN}" ]; then
+    if [ -n "${DOCKER_REGISTRY}" ]; then
+        echo "Login to Docker Registry ${DOCKER_REGISTRY}..."
+        docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}" "${DOCKER_REGISTRY}"
+    else
+        echo "Login to Docker default Registry..."
+        docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}"
+    fi
 fi

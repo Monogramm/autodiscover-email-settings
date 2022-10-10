@@ -36,11 +36,16 @@ jobs:
         run: |
           ./hooks/run test
 
-      #- name: Execute CI push hooks
-      #  id: docker_push
-      #  run: |
-      #    # Export variables to login and push to GitHub Container Registry
-      #    #export DOCKER_REGISTRY=ghcr.io
-      #    #export DOCKER_LOGIN=${{ github.repository_owner }}
-      #    #export DOCKER_PASSWORD=${{ secrets.GITHUB_REGISTRY_TOKEN }}
-      #    ./hooks/run push
+      - name: Execute CI push hooks
+        id: docker_push
+        if: ${{ github.event_name == 'push' && ( github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' ) }}
+        run: |
+          # Export variables to login and push to DockerHub Registry
+          export DOCKER_LOGIN=${{ secrets.DOCKERHUB_REGISTRY_LOGIN }}
+          export DOCKER_PASSWORD=${{ secrets.DOCKERHUB_REGISTRY_TOKEN }}
+          ./hooks/run push
+          # Export variables to login and push to GitHub Container Registry
+          #export DOCKER_REGISTRY=ghcr.io
+          #export DOCKER_LOGIN=${{ github.repository_owner }}
+          #export DOCKER_PASSWORD=${{ secrets.GITHUB_REGISTRY_TOKEN }}
+          #./hooks/run push

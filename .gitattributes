@@ -1,1 +1,14 @@
+# Autodetect text files
 * text=auto
+
+# ...Unless the name matches the following
+# overriding patterns
+
+# Definitively text files
+*.md text
+*.sh text eol=lf
+*.yml text eol=lf
+*.conf text eol=lf
+Dockerfile text eol=lf
+
+**/hooks text eol=lf
