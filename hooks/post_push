@@ -22,7 +22,12 @@ fi
 docker tag "$IMAGE_NAME" "$DOCKER_BASE_IMAGE:$SOURCE_COMMIT"
 docker push "$DOCKER_BASE_IMAGE:$SOURCE_COMMIT"
 
-if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_REGISTRY}" ]; then
-    echo "Logout of Docker Registry ${DOCKER_REGISTRY}..."
-    docker logout "${DOCKER_REGISTRY}"
+if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_LOGIN}" ]; then
+    if [ -n "${DOCKER_REGISTRY}" ]; then
+        echo "Logout of Docker Registry ${DOCKER_REGISTRY}..."
+        docker logout "${DOCKER_REGISTRY}"
+    else
+        echo "Logout of Docker default Registry..."
+        docker logout
+    fi
 fi
