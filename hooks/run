@@ -15,9 +15,9 @@ export COMMIT_MSG
 COMMIT_MSG=$(git log -1 --format=%s)
 
 export ARCHI
-ARCHI=${1:-amd64}
+ARCHI=${2:-amd64}
 export VARIANT
-VARIANT=${2:-lts-alpine}
+VARIANT=${3:-lts-alpine}
 
 export DOCKER_REPO=${DOCKER_REPO:-monogramm/autodiscover-email-settings}
 export DOCKERFILE_PATH="Dockerfile"
