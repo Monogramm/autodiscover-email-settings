@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        variant: ['alpine']
+        arch: ['amd64', 'arm32v6', 'arm32v7', 'arm64v8']
+        variant: ['lts-alpine']
 
     steps:
       - name: Check Out Repo
@@ -26,7 +27,7 @@ jobs:
           # Export variables to tag against GitHub Container Registry
           #export DOCKER_REGISTRY=ghcr.io
           #export DOCKER_REPO=${{ github.repository }}
-          ./hooks/run build
+          ./hooks/run build {{ matrix.arch }} {{ matrix.variant }}
 
       - name: Display docker images
         run: docker images
