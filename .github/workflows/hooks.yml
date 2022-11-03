@@ -32,13 +32,14 @@ jobs:
 
       - name: Execute CI build ARM hooks
         id: docker_build_arm
-        uses: pguyot/arm-runner-action@v2
         if: matrix.arch == 'arm32v6' || matrix.arch == 'arm32v7' || matrix.arch == 'arm64v8'
-        run: |
-          # Export variables to tag against GitHub Container Registry
-          #export DOCKER_REGISTRY=ghcr.io
-          #export DOCKER_REPO=${{ github.repository }}
-          ./hooks/run build ${{ matrix.arch }} ${{ matrix.variant }}
+        uses: pguyot/arm-runner-action@v2
+        with:
+          commands: |
+            # Export variables to tag against GitHub Container Registry
+            #export DOCKER_REGISTRY=ghcr.io
+            #export DOCKER_REPO=${{ github.repository }}
+            ./hooks/run build ${{ matrix.arch }} ${{ matrix.variant }}
 
       - name: Display docker images
         run: docker images
@@ -51,10 +52,11 @@ jobs:
 
       - name: Execute CI test hooks
         id: docker_test_arm
-        uses: pguyot/arm-runner-action@v2
         if: matrix.arch == 'arm32v6' || matrix.arch == 'arm32v7' || matrix.arch == 'arm64v8'
-        run: |
-          ./hooks/run test
+        uses: pguyot/arm-runner-action@v2
+        with:
+          commands: |
+           ./hooks/run test
 
       - name: Execute CI push hooks
         id: docker_push
