@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package.json yarn.lock index.js settings.js /app/
 
 RUN set -ex; \
-    which node | ln -s /usr/local/sbin/nodejs /usr/local/sbin/node; \
+    which node && node --version | ln -s /usr/local/sbin/nodejs /usr/local/sbin/node; \
     node --version; \
     yarn --version; \
     yarn --prod; \
