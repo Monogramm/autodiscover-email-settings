@@ -3,14 +3,12 @@
 # See documentation for details:
 # https://docs.docker.com/docker-hub/builds/advanced/
 
-if [ ! -f "$DOCKERFILE_PATH" ]; then
-    # Copy the files
-    template="Dockerfile.template"
-    cp "$template" "$DOCKERFILE_PATH"
+# Copy the files
+template="Dockerfile.template"
+cp "$template" "$DOCKERFILE_PATH"
 
-    # Replace the variables.
-    sed -ri -e '
-        s/%%ARCHI%%/'"$ARCHI"'/g;
-        s/%%VARIANT%%/'"$VARIANT"'/g;
-    ' "$DOCKERFILE_PATH"
-fi
+# Replace the variables.
+sed -ri -e '
+    s/%%ARCHI%%/'"$ARCHI"'/g;
+    s/%%VARIANT%%/'"$VARIANT"'/g;
+' "$DOCKERFILE_PATH"
