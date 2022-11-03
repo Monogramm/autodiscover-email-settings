@@ -1,4 +1,4 @@
-FROM %%ARCHI%%/node:%%VARIANT%%
+FROM node:lts-alpine
 
 EXPOSE 8000
 
