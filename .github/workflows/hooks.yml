@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platforms: ['linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6']
+        platforms: ['linux/amd64,linux/arm64,linux/arm/v7']
 
     steps:
       - name: Check Out Repo
         uses: actions/checkout@v2
 
-      - name: Execute CI build AMD hooks
+      - name: Execute CI build hooks
         id: docker_build
         run: |
           # Export variables to tag against GitHub Container Registry
@@ -31,7 +31,7 @@ jobs:
       - name: Display docker images
         run: docker images
 
-      - name: Execute CI test AMD hooks
+      - name: Execute CI test hooks
         id: docker_test
         run: |
           ./hooks/run test
