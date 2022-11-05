@@ -23,7 +23,7 @@ for file in docker-compose*.test.yml; do
     docker-compose --ansi never -f "${file}" down
 
     # Test container restart
-    docker-compose --ansi never -f "${file}" up -d && sleep 60
+    docker-compose --ansi never -f "${file}" up -d --no-build && sleep 60
     docker-compose --ansi never -f "${file}" logs -f "sut"
     docker-compose --ansi never -f "${file}" ps
     docker-compose --ansi never -f "${file}" logs --no-color "autodiscover"
