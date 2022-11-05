@@ -10,24 +10,24 @@ fi
 
 for file in docker-compose*.test.yml; do
 
-    echo "Starting Test in ${file}..."
+    echo "Starting Test in ${file} for platform ${PLATFORM}..."
 
     # Build test container
-    docker-compose --no-ansi -f "${file}" build sut
+    docker-compose --ansi never -f "${file}" build sut
     # Test container run
-    docker-compose --no-ansi -f "${file}" up -d && sleep 60
-    docker-compose --no-ansi -f "${file}" logs -f "sut"
-    docker-compose --no-ansi -f "${file}" ps
-    docker-compose --no-ansi -f "${file}" logs --no-color "autodiscover"
-    docker-compose --no-ansi -f "${file}" ps "sut" | grep "Exit 0" || exit 1
-    docker-compose --no-ansi -f "${file}" down
+    docker-compose --ansi never -f "${file}" up -d --no-build && sleep 60
+    docker-compose --ansi never -f "${file}" logs -f "sut"
+    docker-compose --ansi never -f "${file}" ps
+    docker-compose --ansi never -f "${file}" logs --no-color "autodiscover"
+    docker-compose --ansi never -f "${file}" ps "sut" | grep "Exit 0" || exit 1
+    docker-compose --ansi never -f "${file}" down
 
     # Test container restart
-    docker-compose --no-ansi -f "${file}" up -d && sleep 60
-    docker-compose --no-ansi -f "${file}" logs -f "sut"
-    docker-compose --no-ansi -f "${file}" ps
-    docker-compose --no-ansi -f "${file}" logs --no-color "autodiscover"
-    docker-compose --no-ansi -f "${file}" ps "sut" | grep "Exit 0" || exit 1
-    docker-compose --no-ansi -f "${file}" down -v
+    docker-compose --ansi never -f "${file}" up -d && sleep 60
+    docker-compose --ansi never -f "${file}" logs -f "sut"
+    docker-compose --ansi never -f "${file}" ps
+    docker-compose --ansi never -f "${file}" logs --no-color "autodiscover"
+    docker-compose --ansi never -f "${file}" ps "sut" | grep "Exit 0" || exit 1
+    docker-compose --ansi never -f "${file}" down -v
 
 done
