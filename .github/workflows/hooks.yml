@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platforms: ['linux/amd64'] # Not working yet in GHA (but works locally): linux/arm64,linux/arm/v7,linux/arm/v6
+        platforms: ['linux/amd64', 'linux/arm64'] # Not working yet in GHA (but works locally): linux/arm64,linux/arm/v7,linux/arm/v6
 
     steps:
       - name: Check Out Repo
@@ -35,6 +35,16 @@ jobs:
         id: docker_test
         run: |
           ./hooks/run test
+
+  push:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platforms: ['linux/amd64'] # Not working yet in GHA (but works locally): linux/arm64,linux/arm/v7,linux/arm/v6
+
+    steps:
+      - name: Check Out Repo
+        uses: actions/checkout@v2
 
       - name: Execute CI push hooks
         id: docker_push
