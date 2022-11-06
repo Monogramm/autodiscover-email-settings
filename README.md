@@ -3,8 +3,7 @@
 [![Build Status](https://travis-ci.org/Monogramm/autodiscover-email-settings.svg)](https://travis-ci.org/Monogramm/autodiscover-email-settings)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/f471992f0aa348b791c9ed17ccea344d)](https://www.codacy.com/gh/Monogramm/autodiscover-email-settings?utm_source=github.com&utm_medium=referral&utm_content=Monogramm/autodiscover-email-settings&utm_campaign=Badge_Grade)
 [![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/autodiscover-email-settings.svg)](https://hub.docker.com/r/monogramm/autodiscover-email-settings/)
-[![](https://images.microbadger.com/badges/version/monogramm/autodiscover-email-settings.svg)](https://microbadger.com/images/monogramm/autodiscover-email-settings)
-[![Docker layers](https://images.microbadger.com/badges/image/monogramm/autodiscover-email-settings.svg)](https://microbadger.com/images/monogramm/autodiscover-email-settings)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/monogramm/autodiscover-email-settings)
 
 This service is created to autodiscover your provider email settings.
 
@@ -266,7 +265,7 @@ WantedBy=multi-user.target
 
 Inspired from <https://github.com/sylvaindumont/autodiscover.xml>, but without the few restrictions mentioned in the original project notes and with a simple support page to allow manual setup and iOS profile download.
 
-The original project was inspired from <https://github.com/johansmitsnl/docker-email-autodiscover>, but with <https://github.com/Tiliq/autodiscover.xml> instead of <https://github.com/gronke/email-autodiscover> to allow a much lighter ([![](https://images.microbadger.com/badges/image/weboaks/autodiscover-email-settings.svg)](https://microbadger.com/images/weboaks/autodiscover-email-settings)) image based of node on alpine instead of apache on debian ([![](https://images.microbadger.com/badges/image/jsmitsnl/docker-email-autodiscover.svg)](https://microbadger.com/images/jsmitsnl/docker-email-autodiscover)).
+The original project was inspired from <https://github.com/johansmitsnl/docker-email-autodiscover>, but with <https://github.com/Tiliq/autodiscover.xml> instead of <https://github.com/gronke/email-autodiscover> to allow a much lighter image based of node on alpine instead of apache on debian.
 
 Thanks to [@HLFH ](https://github.com/HLFH) for providing sample NGinx configuration and systemd service configuration.
 

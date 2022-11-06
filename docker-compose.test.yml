@@ -1,4 +1,4 @@
-version: '2.3'
+version: '2.4'
 
 services:
   autodiscover:
@@ -13,6 +13,7 @@ services:
         - VCS_REF=${SOURCE_COMMIT}
         - BUILD_DATE=${BUILD_DATE}
     image: ${IMAGE_NAME}
+    platform: ${PLATFORM}
     container_name: autodiscover
     environment:
       - COMPANY_NAME=Company

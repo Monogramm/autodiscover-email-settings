@@ -6,6 +6,8 @@ WORKDIR /app
 COPY package.json yarn.lock index.js settings.js /app/
 
 RUN set -ex; \
+    node --version; \
+    yarn --version; \
     yarn --prod; \
     yarn cache clean
 
