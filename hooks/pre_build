@@ -3,6 +3,9 @@
 # See documentation for details:
 # https://docs.docker.com/docker-hub/builds/advanced/
 
+docker version
+docker buildx version
+
 docker buildx ls
 
 docker buildx create \

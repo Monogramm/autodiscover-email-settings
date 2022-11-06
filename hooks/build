@@ -17,6 +17,5 @@ docker buildx build \
     --builder "buildx_${SOURCE_COMMIT}" \
     --platform "${PLATFORMS}" \
     --no-cache \
-    --load \
     -f "$DOCKERFILE_PATH" \
     -t "${IMAGE_NAME}" ${DOCKER_CLI_TAGS} .
