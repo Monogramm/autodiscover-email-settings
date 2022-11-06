@@ -2,10 +2,20 @@
 
 # See documentation for details:
 # https://docs.docker.com/docker-hub/builds/advanced/
-# https://microbadger.com/labels
 
-docker build \
+# Legacy
+#docker build \
+#    --build-arg "VCS_REF=${SOURCE_COMMIT}" \
+#    --build-arg "BUILD_DATE=${BUILD_DATE}" \
+#    --no-cache \
+#    -f "$DOCKERFILE_PATH" \
+#    -t "${IMAGE_NAME}" ${DOCKER_CLI_TAGS} .
+
+docker buildx build \
     --build-arg "VCS_REF=${SOURCE_COMMIT}" \
-    --build-arg "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" \
+    --build-arg "BUILD_DATE=${BUILD_DATE}" \
+    --builder "buildx_${SOURCE_COMMIT}" \
+    --platform "${PLATFORMS}" \
+    --no-cache \
     -f "$DOCKERFILE_PATH" \
-    -t "$IMAGE_NAME" .
+    -t "${IMAGE_NAME}" ${DOCKER_CLI_TAGS} .

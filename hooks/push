@@ -3,4 +3,14 @@
 # See documentation for details:
 # https://docs.docker.com/docker-hub/builds/advanced/
 
-docker push "$IMAGE_NAME"
+# Legacy
+#docker push "$IMAGE_NAME"
+
+docker buildx build \
+    --build-arg "VCS_REF=${SOURCE_COMMIT}" \
+    --build-arg "BUILD_DATE=${BUILD_DATE}" \
+    --builder "buildx_${SOURCE_COMMIT}" \
+    --platform "${PLATFORMS}" \
+    --push \
+    -f "$DOCKERFILE_PATH" \
+    -t "${IMAGE_NAME}" ${DOCKER_CLI_TAGS} .

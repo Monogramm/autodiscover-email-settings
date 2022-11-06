@@ -13,15 +13,32 @@ export SOURCE_COMMIT
 SOURCE_COMMIT=$(git rev-parse --short HEAD)
 export COMMIT_MSG
 COMMIT_MSG=$(git log -1 --format=%s)
+export BUILD_DATE
+BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+
+export PLATFORMS
+PLATFORMS=${2:-linux/amd64}
 
 export DOCKER_REPO=${DOCKER_REPO:-monogramm/autodiscover-email-settings}
-export DOCKERFILE_PATH=Dockerfile
+export DOCKERFILE_PATH="Dockerfile"
 export DOCKER_TAG=${DOCKER_TAG:-latest}
 
 if [ -n "${DOCKER_REGISTRY}" ]; then
-    export IMAGE_NAME=${DOCKER_REGISTRY}/${DOCKER_REPO}:${DOCKER_TAG}
+    export DOCKER_BASE_IMAGE=${DOCKER_REGISTRY}/${DOCKER_REPO}
 else
-    export IMAGE_NAME=${DOCKER_REPO}:${DOCKER_TAG}
+    export DOCKER_BASE_IMAGE=${DOCKER_REPO}
+fi
+export IMAGE_NAME=${DOCKER_BASE_IMAGE}:${DOCKER_TAG}
+
+export DOCKER_CLI_TAGS
+DOCKER_CLI_TAGS="-t ${DOCKER_BASE_IMAGE}:${SOURCE_COMMIT} "
+
+if [ -f ./.dockertags ]; then
+    for tag in $(cat ./.dockertags); do
+        if [ ! "${tag}" = "${DOCKER_TAG}" ]; then
+            DOCKER_CLI_TAGS="${DOCKER_CLI_TAGS} -t ${DOCKER_BASE_IMAGE}:${tag} "
+        fi
+    done
 fi
 
 # Execute hooks in given order
