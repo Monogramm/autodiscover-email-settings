@@ -1,5 +1,7 @@
 ports:
   - port: 8000
+    name: Frontend
+    onOpen: open-preview
 
 tasks:
   # https://github.com/gitpod-io/gitpod/issues/666#issuecomment-534347856
