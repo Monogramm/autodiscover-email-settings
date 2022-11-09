@@ -9,7 +9,7 @@
 docker buildx build \
     --build-arg "VCS_REF=${SOURCE_COMMIT}" \
     --build-arg "BUILD_DATE=${BUILD_DATE}" \
-    --builder "buildx_${SOURCE_COMMIT}" \
+    --builder "buildx_push_${SOURCE_COMMIT}}" \
     --platform "${PLATFORMS}" \
     --push \
     -f "$DOCKERFILE_PATH" \

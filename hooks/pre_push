@@ -12,3 +12,12 @@ if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_LOGIN}" ]; then
         docker login -u "${DOCKER_LOGIN}" -p "${DOCKER_PASSWORD}"
     fi
 fi
+
+docker buildx ls
+
+docker buildx create \
+    --platform "${PLATFORMS}" \
+    --name "buildx_push_${SOURCE_COMMIT}" \
+    --use
+
+docker buildx inspect "buildx_push_${SOURCE_COMMIT}"

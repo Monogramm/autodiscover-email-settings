@@ -10,7 +10,7 @@ docker buildx ls
 
 docker buildx create \
     --platform "${PLATFORMS}" \
-    --name "buildx_${SOURCE_COMMIT}" \
+    --name "buildx_build_${SOURCE_COMMIT}" \
     --use
 
-docker buildx inspect "buildx_${SOURCE_COMMIT}"
+docker buildx inspect "buildx_build_${SOURCE_COMMIT}"
