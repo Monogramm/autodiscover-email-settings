@@ -4,7 +4,7 @@
 # https://docs.docker.com/docker-hub/builds/advanced/
 
 docker buildx ls
-docker buildx inspect "buildx_${SOURCE_COMMIT}"
+docker buildx inspect "buildx_build_${SOURCE_COMMIT}"
 
-docker buildx stop "buildx_${SOURCE_COMMIT}"
-docker buildx rm "buildx_${SOURCE_COMMIT}"
+docker buildx stop "buildx_build_${SOURCE_COMMIT}"
+docker buildx rm "buildx_build_${SOURCE_COMMIT}"

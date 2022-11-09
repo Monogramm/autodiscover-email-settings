@@ -26,3 +26,9 @@ if [ -n "${DOCKER_PASSWORD}" ] && [ -n "${DOCKER_LOGIN}" ]; then
         docker logout
     fi
 fi
+
+docker buildx ls
+docker buildx inspect "buildx_push_${SOURCE_COMMIT}"
+
+docker buildx stop "buildx_push_${SOURCE_COMMIT}"
+docker buildx rm "buildx_push_${SOURCE_COMMIT}"
