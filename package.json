@@ -37,7 +37,7 @@
     "koa-buddy": "^0.1.0",
     "koa-router": "^5.1.2",
     "koa-swig": "^2.0.0",
-    "minimist": "^1.2.6",
+    "minimist": "^1.2.7",
     "qs": "^6.10.3"
   }
 }
