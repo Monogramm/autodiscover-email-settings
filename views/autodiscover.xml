@@ -19,7 +19,7 @@
                                 <DomainRequired>on</DomainRequired>
                                 <DomainName>{{domain}}</DomainName>
                                 <SPA>on</SPA>
-                                <SSL>on</SSL>
+                                <SSL>{{imapssl}}</SSL>
                                 <Encryption>{{imapenc}}</Encryption>
                                 <AuthRequired>on</AuthRequired>
                         </Protocol>
@@ -34,7 +34,7 @@
                                 <DomainRequired>on</DomainRequired>
                                 <DomainName>{{domain}}</DomainName>
                                 <SPA>on</SPA>
-                                <SSL>on</SSL>
+                                <SSL>{{popssl}}</SSL>
                                 <Encryption>{{popenc}}</Encryption>
                                 <AuthRequired>on</AuthRequired>
                         </Protocol>
@@ -48,7 +48,7 @@
                                 <DomainRequired>on</DomainRequired>
                                 <DomainName>{{domain}}</DomainName>
                                 <SPA>on</SPA>
-                                <SSL>on</SSL>
+                                <SSL>{{smtpssl}}</SSL>
                                 <Encryption>{{smtpenc}}</Encryption>
                                 <AuthRequired>on</AuthRequired>
                         </Protocol>
