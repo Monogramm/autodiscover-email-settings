@@ -54,6 +54,10 @@ function *autodiscover() {
 	const popenc	= settings.pop.socket === "STARTTLS" ? "TLS" : settings.pop.socket;
 	const smtpenc	= settings.smtp.socket === "STARTTLS" ? "TLS" : settings.smtp.socket;
 
+	const imapssl	= settings.imap.socket === "SSL" ? "on" : "off";
+	const popssl	= settings.pop.socket === "SSL" ? "on" : "off";
+	const smtpssl	= settings.smtp.socket === "SSL" ? "on" : "off";
+
 	yield this.render("autodiscover", {
 		schema: xmlns,
 		email,
@@ -61,7 +65,10 @@ function *autodiscover() {
 		domain,
 		imapenc,
 		popenc,
-		smtpenc
+		smtpenc,
+		imapssl,
+		popssl,
+		smtpssl
 	});
 }
 

@@ -1,97 +1,71 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
-	<Response xmlns="{{schema}}">
-		<User>
-			<DisplayName>{{info.name}} Email</DisplayName>
-		</User>
+<Autodiscover
+        xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006">
+        <Response
+                xmlns="{{schema}}">
+                <User>
+                        <DisplayName>{{info.name}}</DisplayName>
+                </User>
+                <Account>
+                        <AccountType>email</AccountType>
+                        <Action>settings</Action>
+                        <ServiceHome>{{info.url}}</ServiceHome>
+                        {%- if imap.host %}
+                        <Protocol>
+                                <Type>IMAP</Type>
+                                <Server>{{imap.host}}</Server>
+                                <Port>{{imap.port}}</Port>
+                                <LoginName>{{email}}</LoginName>
+                                <DomainRequired>on</DomainRequired>
+                                <DomainName>{{domain}}</DomainName>
+                                <SPA>on</SPA>
+                                <SSL>{{imapssl}}</SSL>
+                                <Encryption>{{imapenc}}</Encryption>
+                                <AuthRequired>on</AuthRequired>
+                        </Protocol>
+                        {% endif -%}
 
-		{%- if imap.host %}
-		<Account>
-			<AccountType>email</AccountType>
-			<Action>settings</Action>
-			<ServiceHome>{{info.url}}</ServiceHome>
-
-			<Protocol>
-				<Type>IMAP</Type>
-				<TTL>1</TTL>
-
-				<Server>{{imap.host}}</Server>
-				<Port>{{imap.port}}</Port>
-
-				<LoginName>{{email}}</LoginName>
-
-				<DomainRequired>on</DomainRequired>
-				<DomainName>{{domain}}</DomainName>
-
-				<SPA>off</SPA>
-				<Encryption>{{imapenc}}</Encryption>
-				<AuthRequired>on</AuthRequired>
-			</Protocol>
-		</Account>
-		{% endif -%}
-
-		{%- if pop.host %}
-		<Account>
-			<AccountType>email</AccountType>
-			<Action>settings</Action>
-			<ServiceHome>{{info.url}}</ServiceHome>
-
-			<Protocol>
-				<Type>POP</Type>
-				<TTL>1</TTL>
-
-				<Server>{{pop.host}}</Server>
-				<Port>{{pop.port}}</Port>
-
-				<LoginName>{{email}}</LoginName>
-
-				<DomainRequired>on</DomainRequired>
-				<DomainName>{{domain}}</DomainName>
-
-				<SPA>off</SPA>
-				<Encryption>{{popenc}}</Encryption>
-				<AuthRequired>on</AuthRequired>
-			</Protocol>
-		</Account>
-		{% endif -%}
-
-		{%- if smtp.host %}
-		<Account>
-			<AccountType>email</AccountType>
-			<Action>settings</Action>
-			<ServiceHome>{{info.url}}</ServiceHome>
-
-			<Protocol>
-				<Type>SMTP</Type>
-				<TTL>1</TTL>
-
-				<Server>{{smtp.host}}</Server>
-				<Port>{{smtp.port}}</Port>
-
-				<LoginName>{{email}}</LoginName>
-
-				<DomainRequired>on</DomainRequired>
-				<DomainName>{{domain}}</DomainName>
-
-				<SPA>off</SPA>
-				<Encryption>{{smtpenc}}</Encryption>
-				<AuthRequired>on</AuthRequired>
-			</Protocol>
-		</Account>
-		{% endif -%}
-
-		{%- if mobilesync.url %}
-		<Action>
-			<Settings>
-				<Server>
-					<Type>MobileSync</Type>
-					<Url>{{mobilesync.url}}</Url>
-					{%- if mobilesync.name %}
-					<Name>{{mobilesync.name}}</Name>
-					{% endif -%}
-				</Server>
-			</Settings>
-		</Action>
-		{% endif -%}
-	</Response>
+                        {%- if pop.host %}
+                        <Protocol>
+                                <Type>POP</Type>
+                                <Server>{{pop.host}}</Server>
+                                <Port>{{pop.port}}</Port>
+                                <LoginName>{{email}}</LoginName>
+                                <DomainRequired>on</DomainRequired>
+                                <DomainName>{{domain}}</DomainName>
+                                <SPA>on</SPA>
+                                <SSL>{{popssl}}</SSL>
+                                <Encryption>{{popenc}}</Encryption>
+                                <AuthRequired>on</AuthRequired>
+                        </Protocol>
+                        {% endif -%}
+                        {%- if smtp.host %}
+                        <Protocol>
+                                <Type>SMTP</Type>
+                                <Server>{{smtp.host}}</Server>
+                                <Port>{{smtp.port}}</Port>
+                                <LoginName>{{email}}</LoginName>
+                                <DomainRequired>on</DomainRequired>
+                                <DomainName>{{domain}}</DomainName>
+                                <SPA>on</SPA>
+                                <SSL>{{smtpssl}}</SSL>
+                                <Encryption>{{smtpenc}}</Encryption>
+                                <AuthRequired>on</AuthRequired>
+                        </Protocol>
+                        {% endif -%}
+                </Account>
+                {%- if mobilesync.url %}
+                <Action>
+                        <Settings>
+                                <Server>
+                                        <Type>MobileSync</Type>
+                                        <Url>{{mobilesync.url}}</Url>
+                                        {%- if mobilesync.name %}
+                                        <Name>{{mobilesync.name}}</Name>
+                                        {% endif -%}
+                                </Server>
+                        </Settings>
+                </Action>
+                {% endif -%}
+        </Response>
 </Autodiscover>
