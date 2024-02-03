@@ -28,7 +28,7 @@ function *autodiscover() {
 		null;
 	const xmlns		= schema !== null ? 
 		schema.content : 
-		"http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a";
+		"http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006";
 
 	let email		= request !== null ? 
 		findChild("EMailAddress", request.children) : 
