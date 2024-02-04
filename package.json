@@ -33,9 +33,9 @@
     "ldap"
   ],
   "dependencies": {
-    "koa": "^1.0.0",
+    "koa": "^2.0.0",
     "koa-buddy": "^0.1.0",
-    "koa-router": "^5.1.2",
+    "koa-router": "^7.3.0",
     "koa-swig": "^2.0.0",
     "minimist": "^1.2.6",
     "qs": "^6.10.3"
