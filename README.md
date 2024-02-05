@@ -17,6 +17,7 @@ It provides IMAP/POP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Ap
 
 ## DNS settings
 
+```
     autoconfig              IN      A      {{$AUTODISCOVER_IP}}
     autodiscover            IN      A      {{$AUTODISCOVER_IP}}
     imap                    IN      CNAME  {{$MX_DOMAIN}}.
@@ -28,6 +29,7 @@ It provides IMAP/POP/SMTP/LDAP Autodiscover capabilities on Microsoft Outlook/Ap
     _submission._tcp        IN      SRV    0 0 {{SMTP_PORT}} {{MX_DOMAIN}}.
     _autodiscover._tcp      IN      SRV    0 0 443 autodiscover.{{$DOMAIN}}.
     _ldap._tcp              IN      SRV    0 0 {{LDAP_PORT}} {{LDAP_HOST}}.
+```
 
 Replace above variables with data according to this table
 
@@ -267,7 +269,7 @@ Inspired from <https://github.com/sylvaindumont/autodiscover.xml>, but without t
 
 The original project was inspired from <https://github.com/johansmitsnl/docker-email-autodiscover>, but with <https://github.com/Tiliq/autodiscover.xml> instead of <https://github.com/gronke/email-autodiscover> to allow a much lighter image based of node on alpine instead of apache on debian.
 
-Thanks to [@HLFH ](https://github.com/HLFH) for providing sample NGinx configuration and systemd service configuration.
+Thanks to [@HLFH](https://github.com/HLFH) for providing sample NGinx configuration and systemd service configuration.
 
 ## Notes
 
@@ -282,6 +284,8 @@ The above autoconfiguration methods assume the following:
 -   Microsoft [Exchange Command Reference](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-ascmd/1a3490f1-afe1-418a-aa92-6f630036d65a)
 
 -   Apple [ConfigurationProfile reference](https://developer.apple.com/library/archive/featuredarticles/iPhoneConfigurationProfileRef/index.html)
+
+-   Apple iOS mobile config: <https://developer.apple.com/documentation/devicemanagement/commonpayloadkeys>
 
 -   [DNS SRV Records for LDAP](https://github.com/doctorjbeam/LDAPAutoDiscover)
 
