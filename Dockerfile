@@ -7,12 +7,10 @@ EXPOSE 8000
 WORKDIR /app
 
 # Install production dependencies using the locked versions for reproducible builds
-# --legacy-peer-deps: koa-xml-body still declares a peer dep on koa@^2, though it
-# works fine with koa 3 (no koa-2-specific API surface is used)
 COPY package.json package-lock.json ./
 RUN set -ex; \
     node --version; \
-    npm ci --omit=dev --legacy-peer-deps; \
+    npm ci --omit=dev; \
     npm cache clean --force
 
 # Copy application files
