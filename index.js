@@ -5,7 +5,8 @@ const crypto = require("crypto");
 const Koa = require("koa");
 const app = new Koa();
 const views = require("@ladjs/koa-views");
-const xmlBody = require("koa-xml-body");
+const rawBody = require("raw-body");
+const xml2js = require("xml2js");
 const bodyParser = require("koa-bodyparser");
 const Router = require("@koa/router");
 const router = new Router();
@@ -39,6 +40,43 @@ function buildRequestId() {
 		return crypto.randomUUID();
 	}
 	return crypto.randomBytes(16).toString('hex');
+}
+
+const XML_OPTIONS = {
+	explicitArray: false,
+	explicitChildren: true,
+	preserveChildrenOrder: true,
+	charsAsChildren: false
+};
+
+// Parses XML request bodies into ctx.request.body and keeps the raw text on
+// ctx.request.rawBody. This replaces koa-xml-body, a thin wrapper around the same two
+// libraries that declares a peer dependency on koa@^2 and so breaks a plain `npm ci`
+// on koa 3.
+async function xmlBody(ctx, next) {
+	if (ctx.request.body !== undefined ||
+		!ctx.is('text/xml', 'xml') ||
+		!/^(POST|PUT|PATCH)$/i.test(ctx.method)) {
+		return next();
+	}
+
+	const text = await rawBody(ctx.req, {
+		limit: '1mb',
+		encoding: ctx.request.charset || 'utf8',
+		length: ctx.request.headers['content-length']
+	});
+
+	let parsed;
+	try {
+		parsed = await xml2js.parseStringPromise(text, XML_OPTIONS);
+	} catch (err) {
+		ctx.throw(400, `invalid XML body: ${err.message}`);
+	}
+
+	ctx.request.body = parsed;
+	ctx.request.rawBody = text;
+
+	return next();
 }
 
 function findChild(name, children, def = null) {
@@ -247,10 +285,7 @@ app.use(async (ctx, next) => {
 });
 
 // parse XML bodies into ctx.request.body and keep raw body on ctx.request.rawBody
-app.use(xmlBody({
-	enableRaw: true,
-	xmlOptions: { explicitArray: false, explicitChildren: true, preserveChildrenOrder: true, charsAsChildren: false }
-}));
+app.use(xmlBody);
 
 // parse urlencoded/json bodies
 app.use(bodyParser());
