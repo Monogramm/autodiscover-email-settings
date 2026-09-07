@@ -8,18 +8,18 @@
     "start": "node index.js"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=14.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/monogramm/autodiscover-email-settings.git"
+    "url": "git+https://github.com/freifunkMUC/autodiscover-email-settings.git"
   },
   "author": "Monogramm",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/monogramm/autodiscover-email-settings/issues"
+    "url": "https://github.com/freifunkMUC/autodiscover-email-settings/issues"
   },
-  "homepage": "https://github.com/monogramm/autodiscover-email-settings#readme",
+  "homepage": "https://github.com/freifunkMUC/autodiscover-email-settings#readme",
   "keywords": [
     "monogramm",
     "autoconfigure",
@@ -33,11 +33,16 @@
     "ldap"
   ],
   "dependencies": {
-    "koa": "^1.0.0",
-    "koa-buddy": "^0.1.0",
-    "koa-router": "^5.1.2",
-    "koa-swig": "^2.0.0",
-    "minimist": "^1.2.6",
-    "qs": "^6.10.3"
+    "@koa/router": "^15.3.1",
+    "@ladjs/consolidate": "^1.0.0",
+    "@ladjs/koa-views": "^9.0.0",
+    "koa": "^3.1.2",
+    "koa-bodyparser": "^4.3.0",
+    "nunjucks": "^3.2.4",
+    "raw-body": "^2.5.3",
+    "xml2js": "^0.6.2"
+  },
+  "overrides": {
+    "qs": "^6.16.0"
   }
 }

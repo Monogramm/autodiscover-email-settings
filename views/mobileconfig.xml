@@ -6,7 +6,7 @@
 	<false/>
 	<key>PayloadContent</key>
 	<array>
-{% if imap.host || pop.host %}
+{% if imap.host or pop.host %}
 		<dict>
 			<key>EmailAccountDescription</key>
 			<string>{{email}}</string>
@@ -23,7 +23,11 @@
 			<key>IncomingMailServerPortNumber</key>
 			<integer>{% if imap.host %}{{imap.port}}{% else %}{{pop.port}}{% endif %}</integer>
 			<key>IncomingMailServerUseSSL</key>
-			<{%- if imap.host %}{{imapssl}}{% else %}{{popssl}}{% endif -%}/>
+			{% if imap.host %}
+				{% if imapssl == 'true' %}<true/>{% else %}<false/>{% endif %}
+			{% else %}
+				{% if popssl == 'true' %}<true/>{% else %}<false/>{% endif %}
+			{% endif %}
 			<key>IncomingMailServerUsername</key>
 			<string>{{email}}</string>
 			<key>OutgoingPasswordSameAsIncomingPassword</key>
@@ -35,7 +39,7 @@
 			<key>OutgoingMailServerPortNumber</key>
 			<integer>{{smtp.port}}</integer>
 			<key>OutgoingMailServerUseSSL</key>
-			<{{smtpssl}}/>
+			{% if smtpssl == 'true' %}<true/>{% else %}<false/>{% endif %}
 			<key>OutgoingMailServerUsername</key>
 			<string>{{email}}</string>
 			<key>SMIMEEnabled</key>
@@ -67,7 +71,7 @@
 			<key>LDAPAccountHostName</key>
 			<string>{{ldap.host}}</string>
 			<key>LDAPAccountUseSSL</key>
-			<{{ldapssl}}/>
+			{% if ldapssl == 'true' %}<true/>{% else %}<false/>{% endif %}
 			<key>LDAPAccountUserName</key>
 			<string>{{ldap.userfield}}={{username}},{{ldap.usersbase}}</string>
 			<key>LDAPSearchSettings</key>

@@ -3,7 +3,7 @@ version: '2'
 services:
   autodiscover-example-com:
     # For production, download prebuilt image
-    #image: monogramm/autodiscover-email-settings:latest
+    #image: ghcr.io/freifunkmuc/autodiscover-email-settings:latest
     # For development or CI, build from local Dockerfile
     build: ./
     container_name: autodiscover

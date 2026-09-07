@@ -17,8 +17,8 @@ tasks:
       git config --global user.signingkey ${GNUGPG_KEY}
     command: >
       cd $GITPOD_REPO_ROOT &&
-      yarn --version
-  - init: yarn install
+      npm --version
+  - init: npm ci
     name: frontend
     command: >
-      yarn run start
+      npm run start

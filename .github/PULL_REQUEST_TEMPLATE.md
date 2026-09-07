@@ -12,7 +12,7 @@ Some key notes before you open a PR:
 
 Also, if you're new here
 
-- Contribution Guide => https://github.com/Monogramm/autodiscover-email-settings/blob/master/CONTRIBUTING.md
+- Contribution Guide => https://github.com/freifunkMUC/autodiscover-email-settings/blob/master/CONTRIBUTING.md
 
 -->
 

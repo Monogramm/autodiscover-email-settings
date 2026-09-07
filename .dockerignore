@@ -18,14 +18,8 @@ node_modules
 # Docker files
 docker-compose*.yml
 
-# DockerHub
-hooks/
-
 # GitHub
 .github/
-
-# Travis-CI
-.travis.yml
 
 # Jenkins
 Jenkisfile

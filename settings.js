@@ -1,23 +1,25 @@
 module.exports = {
 	info: {
-		name: process.env.COMPANY_NAME,
-		url: process.env.SUPPORT_URL
+ 		name: process.env.COMPANY_NAME || process.env.DOMAIN || 'Example',
+ 		url: process.env.SUPPORT_URL || (process.env.DOMAIN ? `https://${process.env.DOMAIN}` : '')
 	},
-	domain: process.env.DOMAIN,
+	domain: process.env.DOMAIN || 'example.com',
+
+	// sensible defaults derived from domain when specific env vars are not provided
 	imap: {
-		host: process.env.IMAP_HOST,
-		port: process.env.IMAP_PORT,
-		socket: process.env.IMAP_SOCKET
+		host: process.env.IMAP_HOST || `imap.${process.env.DOMAIN || 'example.com'}`,
+		port: process.env.IMAP_PORT || '993',
+		socket: process.env.IMAP_SOCKET || 'SSL'
 	},
 	pop: {
-		host: process.env.POP_HOST,
-		port: process.env.POP_PORT,
-		socket: process.env.POP_SOCKET
+		host: process.env.POP_HOST || `pop.${process.env.DOMAIN || 'example.com'}`,
+		port: process.env.POP_PORT || '995',
+		socket: process.env.POP_SOCKET || 'SSL'
 	},
 	smtp: {
-		host: process.env.SMTP_HOST,
-		port: process.env.SMTP_PORT,
-		socket: process.env.SMTP_SOCKET
+		host: process.env.SMTP_HOST || `smtp.${process.env.DOMAIN || 'example.com'}`,
+		port: process.env.SMTP_PORT || '587',
+		socket: process.env.SMTP_SOCKET || 'STARTTLS'
 	},
 	mobilesync: {
 		url: process.env.MOBILESYNC_URL,

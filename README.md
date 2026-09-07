@@ -1,9 +1,6 @@
 # ![Autodiscover](icon.svg) Autodiscover Email Settings
 
-[![Build Status](https://travis-ci.org/Monogramm/autodiscover-email-settings.svg)](https://travis-ci.org/Monogramm/autodiscover-email-settings)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f471992f0aa348b791c9ed17ccea344d)](https://www.codacy.com/gh/Monogramm/autodiscover-email-settings?utm_source=github.com&utm_medium=referral&utm_content=Monogramm/autodiscover-email-settings&utm_campaign=Badge_Grade)
-[![Docker Pulls](https://img.shields.io/docker/pulls/monogramm/autodiscover-email-settings.svg)](https://hub.docker.com/r/monogramm/autodiscover-email-settings/)
-![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/monogramm/autodiscover-email-settings)
+[![Build Docker image](https://github.com/freifunkMUC/autodiscover-email-settings/actions/workflows/build.yml/badge.svg)](https://github.com/freifunkMUC/autodiscover-email-settings/actions/workflows/build.yml)
 
 This service is created to autodiscover your provider email settings.
 
@@ -46,6 +43,19 @@ Replace above variables with data according to this table
 
 ## Usage
 
+### Logging
+
+The service emits JSON logs to stdout/stderr by default:
+- startup event (`server_started`)
+- per-request access logs (`request`)
+- unhandled request errors (`request_error`/`app_error`)
+
+Each request log includes a `requestId` field. If a client sends `X-Request-Id`, it is reused; otherwise one is generated and returned in the response header.
+
+Control logging verbosity with `LOG_LEVEL`:
+- `info` (default): startup + request + error logs
+- `silent` or `none`: disable all application logs
+
 [traefik](https://github.com/containous/traefik) can proxy your containers on docker, on docker swarm, and on a wide range of orchestrators.
 You can also achieve this with another proxy like [Nginx](https://www.nginx.com/) for instance.
 
@@ -58,7 +68,7 @@ version: '2'
 
 services:
   autodiscover-example-com:
-    image: monogramm/autodiscover-email-settings:latest
+    image: ghcr.io/freifunkmuc/autodiscover-email-settings:latest
     container_name: autodiscover
     environment:
       - COMPANY_NAME=Company
@@ -104,7 +114,7 @@ version: '3'
 
 services:
   autodiscover-example-com:
-    image: monogramm/autodiscover-email-settings:latest
+    image: ghcr.io/freifunkmuc/autodiscover-email-settings:latest
     container_name: autodiscover
     environment:
       - COMPANY_NAME=Company
@@ -199,9 +209,9 @@ server {
 ### service
 
 The following is an example of `systemd` service configuration for Autodiscover Email Settings. The following setup assumes the following:
-- `node` and `yarn` are installed on your marchine
+- `node` and `npm` are installed on your marchine
 - project is located at `/srv/http/autodiscover`
-- the project dependencies have been previously installed with `yarn --prod`
+- the project dependencies have been previously installed with `npm ci --omit=dev`
 - there is an `autodiscover` user and group with sufficient permissions to read the project and run `node`
 
 ```properties
